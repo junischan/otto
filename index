@@ -1,0 +1,262 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Otto Repuestos</title>
+<style>
+  :root{--bg:#0b0f19;--ink:#e6e8ee;--mut:#98a2b3;--chip:#1b2437;--chipOn:#2b3b6a;--card:#121829;--ring:#4f77ff;--ok:#25D366}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif}
+
+  header{padding:14px 12px;position:sticky;top:0;z-index:10;background:linear-gradient(180deg,#0d1324 0,#0b0f19 60%);border-bottom:1px solid #111629}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 12px}
+  h1{font-size:18px;margin:0 0 8px}
+  .sub{color:var(--mut);font-size:12px;margin-bottom:10px}
+
+  /* brand (logo + nombre) */
+  .brand{display:flex; align-items:center; gap:10px; margin-bottom:10px}
+  .brand .logo{
+    width:36px; height:36px; border-radius:8px; background:#1a2440;
+    display:grid; place-items:center; font-weight:800; color:#e6e8ee;
+  }
+
+  /* categorías tipo carrusel */
+  .cats{display:flex;gap:8px;overflow:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+  .cat{scroll-snap-align:start;white-space:nowrap;border:1px solid #1a2440;background:var(--chip);padding:8px 12px;border-radius:999px;color:var(--ink);cursor:pointer;font-size:14px}
+  .cat.active{background:var(--chipOn);border-color:#334e97}
+
+  .tools{display:flex;gap:10px;margin-top:10px}
+  input[type="search"]{flex:1;min-width:160px;padding:10px 12px;border-radius:10px;border:1px solid #1a2440;background:#0f1529;color:var(--ink);outline:none}
+  input[type="search"]:focus{border-color:var(--ring);box-shadow:0 0 0 3px rgba(79,119,255,.25)}
+
+  main{padding:16px 0 28px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid #101627;border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+  .card img{width:100%;height:auto;display:block;object-fit:contain;background:#0d1222}
+  .meta{padding:10px 12px}
+  .code{font-weight:700}
+  .desc{color:var(--mut);font-size:14px;margin-top:4px}
+  .price{margin-top:8px;font-weight:700}
+  .actions{display:flex;gap:8px;margin-top:10px}
+  .btn{flex:1;text-align:center;text-decoration:none;padding:10px 12px;border-radius:10px;border:1px solid #1a2440;color:var(--ink)}
+  .wa{background:var(--ok);border-color:#1eb857;color:#0b0f19;font-weight:700}
+
+  /* sección contacto */
+  .section{margin:22px 0}
+  .contact{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px}
+  .c-card{background:var(--card); border:1px solid #101627; border-radius:14px; padding:14px}
+  .c-title{font-weight:700; margin-bottom:6px}
+  .c-row{display:flex; align-items:center; gap:8px; color:var(--mut)}
+  .c-row svg{width:18px; height:18px}
+  .c-actions{display:flex; gap:8px; margin-top:10px}
+  .c-btn{flex:1; text-align:center; text-decoration:none; padding:10px 12px; border-radius:10px; border:1px solid #1a2440; color:var(--ink)}
+  .c-btn.wa{background:var(--ok); border-color:#1eb857; color:#0b0f19; font-weight:700}
+
+  footer{color:var(--mut);font-size:12px;text-align:center;padding:22px 0}
+
+  /* --- bottom nav --- */
+  .bottomnav{position:fixed; left:0; right:0; bottom:0; z-index:50;background:#0d1324; border-top:1px solid #111629;}
+  .bottomnav .wrapnav{max-width:1100px; margin:0 auto; padding:8px 10px;display:flex; justify-content:space-between; gap:8px;}
+  .navbtn{flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;padding:6px 0; color:#cbd5e1; text-decoration:none; border-radius:10px;}
+  .navbtn.active{ color:#fff; background:#1a2440; }
+  .navbtn svg{ width:22px; height:22px; }
+  main{ padding-bottom:78px; } /* espacio para que la barra no tape el contenido */
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <!-- Si tenés logo: <img src="images/logo.png" class="logo" alt="Logo"> -->
+      <div class="logo">PR</div>
+      <div>
+        <h1 id="inicio">Otto Repuestos </h1>
+        <div class="sub">Catálogo multimarca | Filtrá por tipo de repuesto</div>
+      </div>
+    </div>
+
+    <div id="cats" class="cats"></div>
+
+    <div class="tools">
+      <input id="q" type="search" placeholder="Buscar por código, tipo o texto (ej: faro, puerta, paragolpe)">
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="grid" class="grid"></div>
+</main>
+
+<!-- CONTACTO -->
+<section id="contacto" class="wrap section">
+  <h2 style="font-size:16px; margin:0 0 10px">Contacto</h2>
+  <div class="contact">
+    <div class="c-card">
+      <div class="c-title">WhatsApp</div>
+      <div class="c-row">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2z"/></svg>
+        <span id="waText">Consultas y pedidos por WhatsApp</span>
+      </div>
+      <div class="c-actions">
+        <a id="ctaWA" class="c-btn wa" target="_blank" rel="noopener">Abrir WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-title">Dirección</div>
+      <div class="c-row">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5z"/></svg>
+        <span>Ciudad / Barrio (cambiá este texto)</span>
+      </div>
+      <div class="c-actions">
+        <a class="c-btn" target="_blank" rel="noopener" href="https://maps.google.com">Ver en Maps</a>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-title">Horario</div>
+      <div class="c-row">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a11 11 0 1 0 11 11A11 11 0 0 0 12 1Zm1 6h-2v6l5 3 .9-1.6-3.9-2.3Z"/></svg>
+        <span>Lun–Sáb 08:00 a 18:00 (editá a tu gusto)</span>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-title">Redes</div>
+      <div class="c-actions">
+        <a class="c-btn" target="_blank" rel="noopener" href="https://instagram.com/">Instagram</a>
+        <a class="c-btn" target="_blank" rel="noopener" href="https://facebook.com/">Facebook</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM NAV -->
+<nav class="bottomnav">
+  <div class="wrapnav">
+    <a id="navHome" class="navbtn active" href="#inicio" onclick="goHome()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 3 10v10a1 1 0 0 0 1 1h6v-6h4v6h6a1 1 0 0 0 1-1V10z"/></svg>
+      <small>Inicio</small>
+    </a>
+    <a id="navCats" class="navbtn" href="#cats" onclick="goCats()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg>
+      <small>Categorías</small>
+    </a>
+    <a id="navSearch" class="navbtn" href="#q" onclick="goSearch()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm9.7 13.3-3.3-3.3"/></svg>
+      <small>Buscar</small>
+    </a>
+    <a class="navbtn" target="_blank" rel="noopener" id="navWA">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2z"/></svg>
+      <small>WhatsApp</small>
+    </a>
+    <a id="navProfile" class="navbtn" href="#contacto" onclick="goContact()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-5 0-9 2.5-9 5v1h18v-1c0-2.5-4-5-9-5Z"/></svg>
+      <small>Contacto</small>
+    </a>
+  </div>
+</nav>
+
+<footer>© <span id="year"></span> Pacto Repuestos</footer>
+
+<script>
+  // ========= CONFIG =========
+  const WHATSAPP = "0986969490  "; // <-- tu número sin '+'
+
+  // Catálogo (agregá más cuando quieras)
+  const ITEMS = [
+    { codigo:"EB3B-16A263-FA", tipo:"Guardabarros", desc:"Delantero izquierdo", precio:310000, img:"images/EB3B-16A263-FA.jpg" },
+    { codigo:"EB3B-16A262-FA", tipo:"Guardabarros", desc:"Delantero derecho",  precio:310000, img:"images/EB3B-16A262-FA.jpg" },
+    { codigo:"EB3B-28401-FA",  tipo:"Guardabarros", desc:"Trasero izquierdo",  precio:310000, img:"images/EB3B-28401-FA.jpg" },
+    { codigo:"EB3B-28400-FA",  tipo:"Guardabarros", desc:"Trasero derecho",   precio:310000, img:"images/EB3B-28400-FA.jpg" },
+
+    /* Ejemplos: borrá si no tenés las fotos */
+    { codigo:"XYZ-PUERTA-01", tipo:"Puertas", desc:"Delantera izquierda", precio:999999, img:"images/puerta-ejemplo.jpg" },
+    { codigo:"XYZ-FARO-01",   tipo:"Faros",   desc:"Faro delantero",      precio:999999, img:"images/faro-ejemplo.jpg" },
+    { codigo:"XYZ-PG-01",     tipo:"Paragolpes", desc:"Paragolpes trasero", precio:999999, img:"images/paragolpe-ejemplo.jpg" }
+  ];
+
+  // Categorías (podés editar el listado/orden)
+  const CATS = ["Todos","Puertas","Faros","Paragolpes","Guardabarros","Espejos","Accesorios"];
+
+  // ========= UTILIDADES =========
+  const $grid = document.getElementById('grid');
+  const $q = document.getElementById('q');
+  const $cats = document.getElementById('cats');
+  const $year = document.getElementById('year');
+  $year.textContent = new Date().getFullYear();
+
+  function money(n){ return new Intl.NumberFormat('es-PY').format(n) + " Gs"; }
+
+  function cardHTML(p){
+    const title = `${p.tipo} — ${p.desc}`;
+    const waMsg = encodeURIComponent(`Hola! Quiero consultar por ${p.codigo} (${title}) a ${money(p.precio)}.`);
+    return `
+      <article class="card" data-tipo="${p.tipo.toLowerCase()}">
+        <img loading="lazy" src="${p.img}" alt="${p.codigo}">
+        <div class="meta">
+          <div class="code">${p.codigo}</div>
+          <div class="desc">${title}</div>
+          <div class="price">${money(p.precio)}</div>
+          <div class="actions">
+            <a class="wa btn" target="_blank" rel="noopener" href="https://wa.me/${WHATSAPP}?text=${waMsg}">WhatsApp</a>
+            <a class="btn" target="_blank" rel="noopener" href="${p.img}">Ver foto</a>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function render(list){ $grid.innerHTML = list.map(cardHTML).join(""); }
+
+  // ========= CATEGORÍAS & BÚSQUEDA =========
+  let activeCat = "Todos";
+
+  function renderCats(){
+    $cats.innerHTML = CATS.map(c=>`<button class="cat ${c===activeCat?'active':''}" data-cat="${c}">${c}</button>`).join("");
+  }
+
+  function applyFilters(){
+    const term = ($q.value||"").toLowerCase().trim();
+    let out = ITEMS.filter(p=>{
+      const text = (p.codigo + " " + p.tipo + " " + p.desc).toLowerCase();
+      const byCat = activeCat==="Todos" ? true : p.tipo.toLowerCase()===activeCat.toLowerCase();
+      return byCat && (!term || text.includes(term));
+    });
+    render(out);
+  }
+
+  // ========= NAV helpers =========
+  function setActive(id){
+    document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));
+    const btn = document.getElementById(id); if(btn) btn.classList.add('active');
+  }
+  function goHome(){ window.scrollTo({top:0, behavior:'smooth'}); setActive('navHome'); }
+  function goCats(){ document.getElementById('cats').scrollIntoView({behavior:'smooth'}); setActive('navCats'); }
+  function goSearch(){
+    const el = document.getElementById('q');
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+    setActive('navSearch');
+    setTimeout(()=>el.focus(), 300);
+  }
+  function goContact(){ document.getElementById('contacto').scrollIntoView({behavior:'smooth'}); setActive('navProfile'); }
+
+  // ========= EVENTOS =========
+  $cats.addEventListener("click", (e)=>{
+    const btn = e.target.closest(".cat"); if(!btn) return;
+    activeCat = btn.dataset.cat; renderCats(); applyFilters();
+  });
+  let t=null; $q.addEventListener("input",()=>{ clearTimeout(t); t=setTimeout(applyFilters,160); });
+
+  // ========= WHATSAPP (links globales) =========
+  document.getElementById('navWA').href =
+    `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola! Quiero consultar por repuestos.')}`;
+  document.getElementById('ctaWA').href =
+    `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola! Quiero consultar por repuestos.')}`;
+
+  // ========= INIT =========
+  renderCats(); render(ITEMS);
+</script>
+</body>
+</html>
