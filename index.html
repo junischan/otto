@@ -1,78 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Otto Repuestos</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Otto Repuestos</title>
+<style>
+  :root{--bg:#0b0f19;--ink:#e6e8ee;--mut:#a7b0c3;--card:#141a2a;--ring:#4f77ff;}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif}
+  h1{margin:20px 0;text-align:center;font-size:40px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 16px 80px}
+  /* GRID + CARD */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:20px}
+  .card{background:var(--card);border:1px solid #101627;border-radius:14px;padding:16px;text-align:center;
+        box-shadow:0 6px 18px rgba(0,0,0,.25);transition:transform .15s ease}
+  .card:hover{transform:translateY(-3px)}
+  .card img{width:100%;height:260px;object-fit:cover;border-radius:10px;cursor:pointer}
+  .code{font-weight:800;margin-top:12px}
+  .desc{color:var(--mut);margin-top:4px}
+  .price{margin-top:8px;font-weight:800}
+  /* MODAL */
+  #modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);align-items:center;justify-content:center;z-index:50}
+  #modal img{max-width:92vw;max-height:92vh;border-radius:12px}
+</style>
 </head>
 <body>
-  <h2>Catálogo</h2>
-  <div id="productos" class="grid"></div>
+  <h1>Catálogo</h1>
+  <main class="wrap">
+    <div id="grid" class="grid"></div>
+  </main>
 
-  <script>
-    fetch('data.json')
-      .then(response => response.json())
-      .then(data => {
-        let contenedor = document.getElementById('productos');
-        data.forEach(item => {
-          contenedor.innerHTML += `
-            <div class="card">
-              <a href="${item.imagen}" target="_blank">
-                <img src="${item.imagen}" alt="${item.descripcion}">
-              </a>
-              <h3>${item.codigo}</h3>
-              <p>${item.descripcion}</p>
-              <p><strong>${item.precio} Gs</strong></p>
-            </div>
-          `;
-        });
-      });
-  </script>
-
-  <style>
-  .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-.card {
-  background: #1e1e1e;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  transition: transform 0.2s;
-}
-
-.card:hover {
-  transform: scale(1.05);
-}
-
-.card img {
-  max-width: 100%;
-  border-radius: 8px;
-  cursor: pointer;
-}
-  </style>
-<!-- Modal para ampliar -->
-<div id="modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;">
-  <img id="modal-img" src="" style="max-width:90%;max-height:90%;border-radius:10px;">
-</div>
+  <!-- Modal para ampliar -->
+  <div id="modal"><img id="modal-img" alt=""></div>
 
 <script>
-  // Detecta clicks en imágenes
-  document.addEventListener("click", function(e){
-    if(e.target.tagName === "IMG" && e.target.closest(".card")){
-      document.getElementById("modal-img").src = e.target.src;
-      document.getElementById("modal").style.display = "flex";
+  // Datos de prueba: misma foto repetida (cambiá o agregá más objetos)
+  const ITEMS = [
+    { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-01", desc:"Tira Barco S10 2012+", precio:310000 },
+    { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-02", desc:"Tira Barco S10 2012+", precio:310000 },
+    { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-03", desc:"Tira Barco S10 2012+", precio:310000 },
+    { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-04", desc:"Tira Barco S10 2012+", precio:310000 },
+    { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-05", desc:"Tira Barco S10 2012+", precio:310000 },
+    { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-06", desc:"Tira Barco S10 2012+", precio:310000 },
+  ];
+  const money = n => new Intl.NumberFormat('es-PY').format(n) + " Gs";
+  const card = p => `
+    <article class="card">
+      <img src="${p.imagen}" alt="${p.codigo}">
+      <div class="code">${p.codigo}</div>
+      <div class="desc">${p.desc}</div>
+      <div class="price">${money(p.precio)}</div>
+    </article>`;
+  document.getElementById('grid').innerHTML = ITEMS.map(card).join('');
+
+  // Abrir modal al clickear una imagen de tarjeta
+  document.addEventListener('click', e=>{
+    const img = e.target.closest('.card img');
+    if(img){
+      document.getElementById('modal-img').src = img.src;
+      document.getElementById('modal').style.display = 'flex';
     }
   });
-
-  // Cerrar modal con click
-  document.getElementById("modal").addEventListener("click", function(){
-    this.style.display = "none";
+  // Cerrar modal al clickear fondo
+  document.getElementById('modal').addEventListener('click', ()=> {
+    document.getElementById('modal').style.display = 'none';
   });
 </script>
 </body>
