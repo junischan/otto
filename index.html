@@ -4,6 +4,26 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Otto Repuestos</title>
+<h2>Catálogo</h2>
+<div id="productos" class="grid"></div>
+
+<script>
+fetch('data.json')
+  .then(response => response.json())
+  .then(data => {
+    let contenedor = document.getElementById('productos');
+    data.forEach(item => {
+      contenedor.innerHTML += `
+        <div class="card">
+          <img src="${item.imagen}" alt="${item.descripcion}" width="200">
+          <h3>${item.codigo}</h3>
+          <p>${item.descripcion}</p>
+          <p><strong>${item.precio} Gs</strong></p>
+        </div>
+      `;
+    });
+  });
+</script>
 <style>
   :root{--bg:#0b0f19;--ink:#e6e8ee;--mut:#98a2b3;--chip:#1b2437;--chipOn:#2b3b6a;--card:#121829;--ring:#4f77ff;--ok:#25D366}
   *{box-sizing:border-box}
