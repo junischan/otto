@@ -5,75 +5,63 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Otto Repuestos</title>
 <style>
-  body{
-    margin:0;
-    background:#0b0f19;
-    color:#e6e8ee;
-    font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;
-  }
-  h1{
-    padding:16px;
-    text-align:center;
-  }
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-    gap:16px;
-    padding:16px;
-  }
-  .card{
-    background:#141a2a;
-    border-radius:10px;
-    overflow:hidden;
-    box-shadow:0 3px 10px rgba(0,0,0,.3);
-    transition:transform 0.2s;
-  }
-  .card:hover{
-    transform:scale(1.05);
-  }
-  .card img{
-    width:100%;
-    height:180px;          /* tamaño uniforme */
-    object-fit:contain;    /* para ver la foto completa */
-    background:#000;       /* relleno detrás de la imagen */
-    display:block;
-  }
-  .info{
-    padding:10px;
-    font-size:14px;
-    text-align:center;
-  }
-  .info .codigo{font-weight:700;font-size:15px}
-  .info .desc{color:#a7b0c3;margin:4px 0}
-  .info .precio{font-weight:700;color:#25d366}
+  :root{--bg:#0b0f19;--ink:#e6e8ee;--mut:#a7b0c3;--card:#141a2a;--ok:#25d366}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif}
+  h1{padding:18px 12px;text-align:center;margin:0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:12px;max-width:1100px;margin:0 auto}
+  .card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .thumb{width:100%;height:160px;object-fit:cover;display:block}
+  .info{padding:10px}
+  .codigo{font-weight:700}
+  .desc{color:var(--mut);font-size:13px;margin-top:2px}
+  .precio{font-weight:700;margin-top:6px}
+  .actions{display:flex;gap:8px;margin-top:8px}
+  .btn{flex:1;text-align:center;text-decoration:none;border:1px solid #20304a;padding:8px;border-radius:9px;color:var(--ink);font-size:13px}
+  .btn.ok{background:var(--ok);color:#0b0f19;font-weight:700;border-color:#1eb857}
+  /* modal */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;padding:20px}
+  .modal.open{display:flex}
+  .modal img{max-width:95vw;max-height:85vh;object-fit:contain;border-radius:10px}
 </style>
 </head>
 <body>
   <h1>Catálogo</h1>
   <div class="grid" id="grid"></div>
 
-<script>
-const ITEMS = [
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-01", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-02", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-03", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-04", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-05", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-06", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-07", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-08", desc:"Tira Barco S10 2012+", precio:310000 }
-];
-const money = n => new Intl.NumberFormat('es-PY').format(n) + " Gs";
-document.getElementById("grid").innerHTML = ITEMS.map(p=>`
-  <div class="card">
-    <img src="${p.imagen}" alt="${p.desc}">
-    <div class="info"> 
-      <div class="codigo">${p.codigo}</div>
-      <div class="desc">${p.desc}</div>
-      <div class="precio">${money(p.precio)}</div>
-    </div>
+  <div class="modal" id="modal" onclick="this.classList.remove('open')">
+    <img id="modalImg" alt="">
   </div>
-`).join("");
+
+<script>
+const WHATSAPP = "595000000000"; // tu número sin '+'
+const money = n => new Intl.NumberFormat('es-PY').format(n) + " Gs";
+
+fetch('data.json')
+  .then(r => r.json())
+  .then(items => {
+    document.getElementById('grid').innerHTML = items.map(p => `
+      <article class="card">
+        <img class="thumb" loading="lazy" src="${p.imagen}" alt="${p.descripcion}"
+             onclick="openImg('${p.imagen}','${p.descripcion.replace(/'/g,'\\\'')}')">
+        <div class="info">
+          <div class="codigo">${p.codigo}</div>
+          <div class="desc">${p.descripcion}</div>
+          <div class="precio">${money(p.precio)}</div>
+          <div class="actions">
+            <a class="btn" href="${p.imagen}" target="_blank" rel="noopener">Ver foto</a>
+            <a class="btn ok" target="_blank" rel="noopener"
+               href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Hola! Consulto por ${p.codigo} (${p.descripcion}) a ${money(p.precio)}.`)}">WhatsApp</a>
+          </div>
+        </div>
+      </article>
+    `).join('');
+  });
+
+function openImg(src, alt){
+  const m = document.getElementById('modal');
+  const img = document.getElementById('modalImg');
+  img.src = src; img.alt = alt; m.classList.add('open');
+}
 </script>
 </body>
 </html>
