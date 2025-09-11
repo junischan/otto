@@ -13,25 +13,25 @@
   }
   h1{padding:16px;text-align:center}
 
-  /* El contenedor principal ya no es un grid de CSS, ahora es un 'columnas' para Masonry */
+  /* Contenedor del layout de mampostería */
   .grid {
     margin: 15px auto;
     max-width: 1200px;
   }
 
-  /* Las tarjetas no tienen una altura fija */
+  /* Cada tarjeta */
   .grid-item {
-    width: 280px; /* Ancho fijo de las tarjetas */
-    margin-bottom: 15px; /* Espacio entre las tarjetas */
+    width: 280px; 
+    margin-bottom: 15px;
     border-radius:10px;
     box-shadow:0 3px 10px rgba(0,0,0,.3);
     overflow: hidden;
     background:#141a2a;
   }
-  
+
   .grid-item img {
     width: 100%;
-    height: auto;
+    height: auto; /* IMPORTANTE: Las imágenes mantienen su proporción */
     display: block;
     object-fit: cover;
     background:#0f1529;
@@ -49,14 +49,17 @@
 </head>
 <body>
   <h1>Catálogo Otto Repuestos</h1>
-  
+
   <div class="grid" id="grid"></div>
 
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 
 <script>
+// Datos de los productos
 const ITEMS = [
   // Usamos imágenes con diferentes proporciones para ver el efecto.
+  // Reemplaza estas URLs con las de tus imágenes reales si tienen diferentes alturas.
   { imagen:"https://via.placeholder.com/280x400/0f1529/e6e8ee?text=Repuesto+1", codigo:"XYZ-BARCO-01", desc:"Tira Barco S10 2012+ (Alto)", precio:310000 },
   { imagen:"https://via.placeholder.com/280x200/0f1529/e6e8ee?text=Repuesto+2", codigo:"XYZ-MOTOR-02", desc:"Filtro de Aire Deportivo (Corto)", precio:85000 },
   { imagen:"https://via.placeholder.com/280x350/0f1529/e6e8ee?text=Repuesto+3", codigo:"ABC-FRENO-03", desc:"Pastillas de Freno Cerámicas (Mediano)", precio:120000 },
@@ -68,11 +71,12 @@ const ITEMS = [
   { imagen:"https://via.placeholder.com/280x280/0f1529/e6e8ee?text=Repuesto+9", codigo:"ZXC-EMBRA-09", desc:"Kit de Embrague Reforzado (Mediano)", precio:480000 },
   { imagen:"https://via.placeholder.com/280x420/0f1529/e6e8ee?text=Repuesto+10", codigo:"ASD-DIREC-10", desc:"Caja de Dirección Hidráulica (Muy Alto)", precio:720000 },
 ];
+
 const money = n => new Intl.NumberFormat('es-PY').format(n) + " Gs";
 
 // 1. Generar el HTML de las tarjetas
 const gridElement = document.getElementById("grid");
-gridElement.innerHTML = ITEMS.map(p=>`
+gridElement.innerHTML = ITEMS.map(p => `
   <div class="grid-item">
     <img src="${p.imagen}" alt="${p.desc}">
     <div class="info">
@@ -83,18 +87,16 @@ gridElement.innerHTML = ITEMS.map(p=>`
       <div class="precio">${money(p.precio)}</div>
     </div>
   </div>
-`).join("");
+`).join('');
 
-// 2. Inicializar Masonry.js después de que el HTML ha sido generado
+// 2. Inicializar Masonry DESPUÉS de que las imágenes se hayan cargado.
 imagesLoaded(gridElement, function() {
   new Masonry(gridElement, {
     itemSelector: '.grid-item',
-    columnWidth: '.grid-item',
-    gutter: 15
+    columnWidth: 280, // Ancho de las columnas
+    gutter: 15        // Espacio entre las tarjetas
   });
 });
 </script>
-
-<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 </body>
 </html>
