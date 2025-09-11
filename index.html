@@ -5,65 +5,64 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Otto Repuestos</title>
 <style>
-  :root{--bg:#0b0f19;--ink:#e6e8ee;--mut:#a7b0c3;--card:#141a2a;--ring:#4f77ff;}
-  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif}
-  h1{margin:20px 0;text-align:center;font-size:40px}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 16px 80px}
-  /* GRID + CARD */
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:20px}
-  .card{background:var(--card);border:1px solid #101627;border-radius:14px;padding:16px;text-align:center;
-        box-shadow:0 6px 18px rgba(0,0,0,.25);transition:transform .15s ease}
-  .card:hover{transform:translateY(-3px)}
-  .card img{width:100%;height:260px;object-fit:cover;border-radius:10px;cursor:pointer}
-  .code{font-weight:800;margin-top:12px}
-  .desc{color:var(--mut);margin-top:4px}
-  .price{margin-top:8px;font-weight:800}
-  /* MODAL */
-  #modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);align-items:center;justify-content:center;z-index:50}
-  #modal img{max-width:92vw;max-height:92vh;border-radius:12px}
+  body{
+    margin:0;
+    background:#0b0f19;
+    color:#e6e8ee;
+    font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;
+  }
+  h1{padding:16px;text-align:center}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:12px;
+    padding:12px;
+  }
+  .card{
+    background:#141a2a;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 3px 10px rgba(0,0,0,.3);
+  }
+  .card img{
+    width:100%;
+    height:140px;
+    object-fit:cover;
+    display:block;
+  }
+  .info{
+    padding:6px 10px;
+    font-size:13px;
+  }
+  .info .codigo{font-weight:700;font-size:14px}
+  .info .desc{color:#a7b0c3}
+  .info .precio{font-weight:700;color:#25d366}
 </style>
 </head>
 <body>
   <h1>Catálogo</h1>
-  <main class="wrap">
-    <div id="grid" class="grid"></div>
-  </main>
-
-  <!-- Modal para ampliar -->
-  <div id="modal"><img id="modal-img" alt=""></div>
+  <div class="grid" id="grid"></div>
 
 <script>
-  // Datos de prueba: misma foto repetida (cambiá o agregá más objetos)
-  const ITEMS = [
-    { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-01", desc:"Tira Barco S10 2012+", precio:310000 },
-    { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-02", desc:"Tira Barco S10 2012+", precio:310000 },
-    { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-03", desc:"Tira Barco S10 2012+", precio:310000 },
-    { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-04", desc:"Tira Barco S10 2012+", precio:310000 },
-    { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-05", desc:"Tira Barco S10 2012+", precio:310000 },
-    { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-06", desc:"Tira Barco S10 2012+", precio:310000 },
-  ];
-  const money = n => new Intl.NumberFormat('es-PY').format(n) + " Gs";
-  const card = p => `
-    <article class="card">
-      <img src="${p.imagen}" alt="${p.codigo}">
-      <div class="code">${p.codigo}</div>
+const ITEMS = [
+  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-01", desc:"Tira Barco S10 2012+", precio:310000 },
+  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-02", desc:"Tira Barco S10 2012+", precio:310000 },
+  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-03", desc:"Tira Barco S10 2012+", precio:310000 },
+  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-04", desc:"Tira Barco S10 2012+", precio:310000 },
+  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-05", desc:"Tira Barco S10 2012+", precio:310000 },
+  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-06", desc:"Tira Barco S10 2012+", precio:310000 },
+];
+const money = n => new Intl.NumberFormat('es-PY').format(n) + " Gs";
+document.getElementById("grid").innerHTML = ITEMS.map(p=>`
+  <div class="card">
+    <img src="${p.imagen}" alt="${p.desc}">
+    <div class="info">
+      <div class="codigo">${p.codigo}</div>
       <div class="desc">${p.desc}</div>
-      <div class="price">${money(p.precio)}</div>
-    </article>`;
-  document.getElementById('grid').innerHTML = ITEMS.map(card).join('');
-
-  // Abrir modal al clickear una imagen de tarjeta
-  document.addEventListener('click', e=>{
-    const img = e.target.closest('.card img');
-    if(img){
-      document.getElementById('modal-img').src = img.src;
-      document.getElementById('modal').style.display = 'flex';
-    }
-  });
-  // Cerrar modal al clickear fondo
-  document.getElementById('modal').addEventListener('click', ()=> {
-    document.getElementById('modal').style.display = 'none';
-  });
+      <div class="precio">${money(p.precio)}</div>
+    </div>
+  </div>
+`).join("");
 </script>
 </body>
 </html>
