@@ -3,40 +3,50 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Otto Repuestos (Pinterest Style)</title>
+<title>Otto Repuestos (Pinterest Style REAL)</title>
 <style>
   body{
     margin:0;
-    background:#0b0f19;
+    background:#0b0f19; /* Fondo oscuro */
     color:#e6e8ee;
     font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;
   }
-  h1{padding:16px;text-align:center}
-
-  /* Contenedor del layout de mampostería */
-  .grid {
-    margin: 15px auto;
-    max-width: 1200px;
+  h1{
+    padding:16px;
+    text-align:center;
+    font-size: 2em; /* Título más prominente */
+    margin-bottom: 20px;
   }
 
-  /* Cada tarjeta */
+  /* Contenedor principal para el layout de Masonry */
+  .grid {
+    margin: 0 auto; /* Centrar el grid */
+    padding: 10px; /* Espacio alrededor del grid */
+    max-width: 1200px; /* Ancho máximo para el grid */
+    /* Importante: el .grid no usa display:grid de CSS aquí, Masonry lo maneja */
+  }
+
+  /* Estilos para cada tarjeta (item de Masonry) */
   .grid-item {
-    width: 280px; 
-    margin-bottom: 15px;
+    width: 250px; /* Ancho fijo para cada columna, similar a Pinterest */
+    margin-bottom: 15px; /* Espacio vertical entre tarjetas */
+    background:#141a2a; /* Fondo de la tarjeta */
     border-radius:10px;
     box-shadow:0 3px 10px rgba(0,0,0,.3);
-    overflow: hidden;
-    background:#141a2a;
+    overflow: hidden; /* Asegura que los bordes redondeados se vean bien */
   }
-
+  
+  /* Estilos para la imagen dentro de la tarjeta */
   .grid-item img {
-    width: 100%;
-    height: auto; /* IMPORTANTE: Las imágenes mantienen su proporción */
+    width: 100%; /* La imagen ocupa todo el ancho de la tarjeta */
+    height: auto; /* IMPORTANTE: Mantiene la proporción de la imagen, alturas variables */
     display: block;
-    object-fit: cover;
-    background:#0f1529;
+    /* object-fit: cover; // Puedes usar 'contain' si quieres que la imagen se vea completa sin recortar */
+    object-fit: cover; /* Recorta la imagen para llenar el espacio, común en Pinterest */
+    background:#0f1529; /* Fondo si la imagen no llena completamente */
   }
 
+  /* Estilos para la información de texto dentro de la tarjeta */
   .info {
     padding: 10px;
     font-size: 13px;
@@ -45,37 +55,58 @@
   .info .codigo{font-weight:700;font-size:14px; margin-bottom: 5px;}
   .info .desc{color:#a7b0c3; margin-bottom: 10px;}
   .info .precio{font-weight:700;color:#25d366; font-size: 15px;}
+
+  /* Media Queries para responsividad - Ajustar el ancho de columna en pantallas más pequeñas */
+  @media (max-width: 768px) {
+    .grid-item {
+      width: calc(50% - 15px); /* Dos columnas en tablets */
+      max-width: 250px; /* Asegura que no se estire demasiado */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .grid-item {
+      width: calc(100% - 10px); /* Una columna en móviles */
+      max-width: unset; /* Quita el límite en móviles */
+    }
+    .grid {
+        padding: 5px;
+    }
+  }
+
 </style>
 </head>
 <body>
   <h1>Catálogo Otto Repuestos</h1>
-
+  
   <div class="grid" id="grid"></div>
 
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 
 <script>
-// Datos de los productos
+// Datos de los productos (usando Placeholders para simular diferentes alturas)
 const ITEMS = [
-  // Usamos imágenes con diferentes proporciones para ver el efecto.
-  // Reemplaza estas URLs con las de tus imágenes reales si tienen diferentes alturas.
-  { imagen:"https://via.placeholder.com/280x400/0f1529/e6e8ee?text=Repuesto+1", codigo:"XYZ-BARCO-01", desc:"Tira Barco S10 2012+ (Alto)", precio:310000 },
-  { imagen:"https://via.placeholder.com/280x200/0f1529/e6e8ee?text=Repuesto+2", codigo:"XYZ-MOTOR-02", desc:"Filtro de Aire Deportivo (Corto)", precio:85000 },
-  { imagen:"https://via.placeholder.com/280x350/0f1529/e6e8ee?text=Repuesto+3", codigo:"ABC-FRENO-03", desc:"Pastillas de Freno Cerámicas (Mediano)", precio:120000 },
-  { imagen:"https://via.placeholder.com/280x250/0f1529/e6e8ee?text=Repuesto+4", codigo:"QWE-LUCES-04", desc:"Faro LED Antiniebla (Medio Corto)", precio:180000 },
-  { imagen:"https://via.placeholder.com/280x450/0f1529/e6e8ee?text=Repuesto+5", codigo:"RTY-RUEDA-05", desc:"Llanta Aleación R17 (Muy Alto)", precio:950000 },
-  { imagen:"https://via.placeholder.com/280x300/0f1529/e6e8ee?text=Repuesto+6", codigo:"FGH-ESPEJO-06", desc:"Espejo Lateral Eléctrico (Cuadrado)", precio:250000 },
-  { imagen:"https://via.placeholder.com/280x220/0f1529/e6e8ee?text=Repuesto+7", codigo:"JKL-SUSPEN-07", desc:"Amortiguador Reforzado (Corto)", precio:310000 },
-  { imagen:"https://via.placeholder.com/280x380/0f1529/e6e8ee?text=Repuesto+8", codigo:"VBN-BOMBA-08", desc:"Bomba de Agua Completa (Alto)", precio:190000 },
-  { imagen:"https://via.placeholder.com/280x280/0f1529/e6e8ee?text=Repuesto+9", codigo:"ZXC-EMBRA-09", desc:"Kit de Embrague Reforzado (Mediano)", precio:480000 },
-  { imagen:"https://via.placeholder.com/280x420/0f1529/e6e8ee?text=Repuesto+10", codigo:"ASD-DIREC-10", desc:"Caja de Dirección Hidráulica (Muy Alto)", precio:720000 },
+  { imagen:"https://via.placeholder.com/250x380/0f1529/e6e8ee?text=Repuesto+A", codigo:"XYZ-BARCO-01", desc:"Tira Barco S10 2012+ (Alto)", precio:310000 },
+  { imagen:"https://via.placeholder.com/250x220/0f1529/e6e8ee?text=Repuesto+B", codigo:"XYZ-MOTOR-02", desc:"Filtro de Aire Deportivo (Corto)", precio:85000 },
+  { imagen:"https://via.placeholder.com/250x300/0f1529/e6e8ee?text=Repuesto+C", codigo:"ABC-FRENO-03", desc:"Pastillas de Freno Cerámicas (Mediano)", precio:120000 },
+  { imagen:"https://via.placeholder.com/250x260/0f1529/e6e8ee?text=Repuesto+D", codigo:"QWE-LUCES-04", desc:"Faro LED Antiniebla (Medio Corto)", precio:180000 },
+  { imagen:"https://via.placeholder.com/250x420/0f1529/e6e8ee?text=Repuesto+E", codigo:"RTY-RUEDA-05", desc:"Llanta Aleación R17 (Muy Alto)", precio:950000 },
+  { imagen:"https://via.placeholder.com/250x280/0f1529/e6e8ee?text=Repuesto+F", codigo:"FGH-ESPEJO-06", desc:"Espejo Lateral Eléctrico (Cuadrado)", precio:250000 },
+  { imagen:"https://via.placeholder.com/250x350/0f1529/e6e8ee?text=Repuesto+G", codigo:"JKL-SUSPEN-07", desc:"Amortiguador Reforzado (Mediano Alto)", precio:310000 },
+  { imagen:"https://via.placeholder.com/250x200/0f1529/e6e8ee?text=Repuesto+H", codigo:"VBN-BOMBA-08", desc:"Bomba de Agua Completa (Muy Corto)", precio:190000 },
+  { imagen:"https://via.placeholder.com/250x310/0f1529/e6e8ee?text=Repuesto+I", codigo:"ZXC-EMBRA-09", desc:"Kit de Embrague Reforzado (Mediano)", precio:480000 },
+  { imagen:"https://via.placeholder.com/250x270/0f1529/e6e8ee?text=Repuesto+J", codigo:"ASD-DIREC-10", desc:"Caja de Dirección Hidráulica (Medio)", precio:720000 },
+  { imagen:"https://via.placeholder.com/250x400/0f1529/e6e8ee?text=Repuesto+K", codigo:"LMN-ELECT-11", desc:"Alternador de Alto Rendimiento (Alto)", precio:650000 },
+  { imagen:"https://via.placeholder.com/250x230/0f1529/e6e8ee?text=Repuesto+L", codigo:"OPQ-FRENOS-12", desc:"Cilindro Maestro de Freno (Corto)", precio:110000 },
 ];
 
 const money = n => new Intl.NumberFormat('es-PY').format(n) + " Gs";
 
-// 1. Generar el HTML de las tarjetas
+// 1. Obtener el elemento contenedor
 const gridElement = document.getElementById("grid");
+
+// 2. Generar el HTML de las tarjetas dinámicamente
 gridElement.innerHTML = ITEMS.map(p => `
   <div class="grid-item">
     <img src="${p.imagen}" alt="${p.desc}">
@@ -89,12 +120,15 @@ gridElement.innerHTML = ITEMS.map(p => `
   </div>
 `).join('');
 
-// 2. Inicializar Masonry DESPUÉS de que las imágenes se hayan cargado.
+// 3. Inicializar Masonry DESPUÉS de que todas las imágenes y el contenido se hayan cargado.
+// Usamos imagesLoaded para asegurarnos de que Masonry calcule bien las posiciones.
 imagesLoaded(gridElement, function() {
   new Masonry(gridElement, {
-    itemSelector: '.grid-item',
-    columnWidth: 280, // Ancho de las columnas
-    gutter: 15        // Espacio entre las tarjetas
+    itemSelector: '.grid-item', // Clase de los elementos que se van a organizar
+    columnWidth: 250,          // Ancho de cada columna (debe coincidir con .grid-item width)
+    gutter: 15,                // Espacio entre los elementos y columnas
+    percentPosition: false,    // No usar porcentajes para la posición (más simple para anchos fijos)
+    transitionDuration: '0.4s' // Animación suave al reorganizar
   });
 });
 </script>
