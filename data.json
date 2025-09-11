@@ -2,7 +2,7 @@
   {
     "codigo": "XYZ-BARCO-01",
     "descripcion": "Tira Barco S10 2012+",
-    "precio": 310000,
+    "precio": "310000",
     "imagen": "imagen/tira-barco.jpeg"
   }
 ]
