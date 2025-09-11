@@ -7,20 +7,17 @@
 <style>
    .card img{
   width:100%;
-  height:180px;          /* antes era 140px */
-  object-fit:cover;      /* recorta pero se ve más */
-  object-position:center;/* centra mejor la pieza */
+  height:220px;         /* alto mayor para respirar */
+  object-fit:contain;   /* MUESTRA TODA la pieza */
+  object-position:center;
+  background:#0f1529;   /* “marcos” discretos si sobra espacio */
+  padding:6px;          /* separa la foto de los bordes */
   display:block;
   border-bottom:1px solid rgba(255,255,255,.04);
 }
 
-/* Ajustes para pantallas más grandes */
-@media (min-width:480px){ 
-  .card img{ height:200px; } 
-}
-@media (min-width:900px){ 
-  .card img{ height:220px; } 
-}
+@media (min-width:480px){ .card img{ height:240px; } }
+@media (min-width:900px){ .card img{ height:260px; } }
 </style>
 </head>
 <body>
