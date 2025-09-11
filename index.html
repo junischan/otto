@@ -51,12 +51,18 @@ const ITEMS = [
   { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-04", desc:"Tira Barco S10 2012+", precio:310000 },
   { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-05", desc:"Tira Barco S10 2012+", precio:310000 },
   { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-06", desc:"Tira Barco S10 2012+", precio:310000 },
+{ imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-07", desc:"Tira Barco S10 2012+", precio:310000 },
+  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-08", desc:"Tira Barco S10 2012+", precio:310000 },
+  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-09", desc:"Tira Barco S10 2012+", precio:310000 },
+  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-10", desc:"Tira Barco S10 2012+", precio:310000 },
+  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-11", desc:"Tira Barco S10 2012+", precio:310000 },
+  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-12", desc:"Tira Barco S10 2012+", precio:310000 },
 ];
 const money = n => new Intl.NumberFormat('es-PY').format(n) + " Gs";
 document.getElementById("grid").innerHTML = ITEMS.map(p=>`
   <div class="card">
     <img src="${p.imagen}" alt="${p.desc}">
-    <div class="info">
+    <div class="info"> 
       <div class="codigo">${p.codigo}</div>
       <div class="desc">${p.desc}</div>
       <div class="precio">${money(p.precio)}</div>
