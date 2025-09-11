@@ -31,6 +31,7 @@
     display: inline-block;
     width: 100%;
     break-inside: avoid;
+    cursor: pointer; /* Agrega un cursor de mano para indicar que es clicable */
   }
   .card img {
     width: 100%;
@@ -68,29 +69,60 @@
       column-count: 4;
     }
   }
+
+  /* --- Estilos para el Lightbox (popup) --- */
+  .lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+  .lightbox.active {
+    visibility: visible;
+    opacity: 1;
+  }
+  .lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    background: transparent;
+  }
 </style>
 </head>
 <body>
   <h1>Catálogo Otto Repuestos</h1>
   <div class="grid" id="grid"></div>
 
+  <div id="lightbox" class="lightbox">
+    <img src="" alt="Imagen ampliada">
+  </div>
+
 <script>
 const money = n => new Intl.NumberFormat('es-PY').format(n) + " Gs";
 const gridElement = document.getElementById("grid");
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = lightbox.querySelector("img");
 
 // La clave: Usamos 'fetch' para cargar el archivo data.json
 fetch('data.json')
   .then(response => {
-    // Verificar que la respuesta sea exitosa
     if (!response.ok) {
       throw new Error('No se pudo cargar el archivo data.json');
     }
     return response.json();
   })
   .then(ITEMS => {
-    // Si la carga fue exitosa, generamos el HTML con los datos
     gridElement.innerHTML = ITEMS.map(p => `
-      <div class="card">
+      <div class="card" data-fullimage="${p.imagen}">
         <img src="${p.imagen}" alt="${p.descripcion}">
         <div class="info">
           <div class="codigo">${p.codigo}</div>
@@ -99,12 +131,30 @@ fetch('data.json')
         </div>
       </div>
     `).join('');
+
+    // --- Lógica para el clic ---
+    const cards = document.querySelectorAll(".card");
+    cards.forEach(card => {
+      card.addEventListener("click", () => {
+        const fullImageUrl = card.getAttribute("data-fullimage");
+        lightboxImage.src = fullImageUrl;
+        lightbox.classList.add("active");
+      });
+    });
+
   })
   .catch(error => {
-    // Manejar errores si el archivo no se carga
     console.error('Error al cargar el catálogo:', error);
     gridElement.innerHTML = '<p style="text-align:center;">Hubo un error al cargar los productos. Por favor, inténtelo de nuevo más tarde.</p>';
   });
+
+// --- Lógica para cerrar el Lightbox al hacer clic fuera de la imagen ---
+lightbox.addEventListener("click", e => {
+  if (e.target !== lightboxImage) {
+    lightbox.classList.remove("active");
+  }
+});
+
 </script>
 </body>
 </html>
