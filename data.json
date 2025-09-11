@@ -1,6 +1,26 @@
 [
   {
+    "codigo": "XYZ-BARCO-00",
+    "descripcion": "Tira Barco S10 2012+",
+    "precio": "310000",
+    "imagen": "imagen/tira-barco.jpeg"
+  }
+]
+[
+  {
     "codigo": "XYZ-BARCO-01",
+    "descripcion": "Tira Barco S10 2012+",
+    "precio": "310000",
+    "imagen": "imagen/tira-barco.jpeg"
+  },
+  {
+    "codigo": "XYZ-BARCO-02",
+    "descripcion": "Tira Barco S10 2012+",
+    "precio": "310000",
+    "imagen": "imagen/tira-barco.jpeg"
+  },
+  {
+    "codigo": "XYZ-BARCO-03",
     "descripcion": "Tira Barco S10 2012+",
     "precio": "310000",
     "imagen": "imagen/tira-barco.jpeg"
