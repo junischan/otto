@@ -11,31 +11,40 @@
     color:#e6e8ee;
     font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;
   }
-  h1{padding:16px;text-align:center}
+  h1{
+    padding:16px;
+    text-align:center;
+  }
   .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:12px;
-    padding:12px;
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+    gap:16px;
+    padding:16px;
   }
   .card{
     background:#141a2a;
     border-radius:10px;
     overflow:hidden;
     box-shadow:0 3px 10px rgba(0,0,0,.3);
+    transition:transform 0.2s;
+  }
+  .card:hover{
+    transform:scale(1.05);
   }
   .card img{
     width:100%;
-    height:140px;
-    object-fit:cover;
+    height:180px;          /* tamaño uniforme */
+    object-fit:contain;    /* para ver la foto completa */
+    background:#000;       /* relleno detrás de la imagen */
     display:block;
   }
   .info{
-    padding:6px 10px;
-    font-size:13px;
+    padding:10px;
+    font-size:14px;
+    text-align:center;
   }
-  .info .codigo{font-weight:700;font-size:14px}
-  .info .desc{color:#a7b0c3}
+  .info .codigo{font-weight:700;font-size:15px}
+  .info .desc{color:#a7b0c3;margin:4px 0}
   .info .precio{font-weight:700;color:#25d366}
 </style>
 </head>
@@ -51,12 +60,8 @@ const ITEMS = [
   { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-04", desc:"Tira Barco S10 2012+", precio:310000 },
   { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-05", desc:"Tira Barco S10 2012+", precio:310000 },
   { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-06", desc:"Tira Barco S10 2012+", precio:310000 },
-{ imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-07", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-08", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-09", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-10", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-11", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-12", desc:"Tira Barco S10 2012+", precio:310000 },
+  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-07", desc:"Tira Barco S10 2012+", precio:310000 },
+  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-08", desc:"Tira Barco S10 2012+", precio:310000 }
 ];
 const money = n => new Intl.NumberFormat('es-PY').format(n) + " Gs";
 document.getElementById("grid").innerHTML = ITEMS.map(p=>`
