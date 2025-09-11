@@ -3,60 +3,69 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Otto Repuestos (Pinterest Style REAL)</title>
+<title>Otto Repuestos</title>
 <style>
-  body{
-    margin:0;
-    background:#0b0f19;
-    color:#e6e8ee;
-    font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;
+  body {
+    margin: 0;
+    background: #0b0f19;
+    color: #e6e8ee;
+    font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
   }
-  h1{
-    padding:16px;
-    text-align:center;
+  h1 {
+    padding: 16px;
+    text-align: center;
     font-size: 2em;
     margin-bottom: 20px;
   }
   .grid {
-    margin: 0 auto;
-    padding: 10px;
-    max-width: 1200px;
+    column-count: 2;
+    column-gap: 15px;
+    padding: 15px;
   }
-  .grid-item {
-    width: 250px;
-    margin-bottom: 15px;
-    background:#141a2a;
-    border-radius:10px;
-    box-shadow:0 3px 10px rgba(0,0,0,.3);
+  .card {
+    background: #141a2a;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .3);
     overflow: hidden;
+    margin-bottom: 15px;
+    display: inline-block;
+    width: 100%;
+    break-inside: avoid;
   }
-  .grid-item img {
+  .card img {
     width: 100%;
     height: auto;
-    display: block;
     object-fit: cover;
-    background:#0f1529;
+    display: block;
+    background: #0f1529;
   }
   .info {
     padding: 10px;
     font-size: 13px;
   }
-  .info .codigo{font-weight:700;font-size:14px; margin-bottom: 5px;}
-  .info .desc{color:#a7b0c3; margin-bottom: 10px;}
-  .info .precio{font-weight:700;color:#25d366; font-size: 15px;}
-  @media (max-width: 768px) {
-    .grid-item {
-      width: calc(50% - 15px);
-      max-width: 250px;
+  .info .codigo {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .info .desc {
+    color: #a7b0c3;
+    font-size: 11px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  .info .precio {
+    font-weight: 700;
+    color: #25d366;
+    font-size: 15px;
+  }
+  @media (min-width: 600px) {
+    .grid {
+      column-count: 3;
     }
   }
-  @media (max-width: 480px) {
-    .grid-item {
-      width: calc(100% - 10px);
-      max-width: unset;
-    }
+  @media (min-width: 900px) {
     .grid {
-        padding: 5px;
+      column-count: 4;
     }
   }
 </style>
@@ -65,47 +74,37 @@
   <h1>Catálogo Otto Repuestos</h1>
   <div class="grid" id="grid"></div>
 
-<script src="js/masonry.pkgd.min.js"></script>
-<script src="js/imagesloaded.pkgd.min.js"></script>
-
 <script>
-const ITEMS = [
-  { imagen:"https://via.placeholder.com/250x380/0f1529/e6e8ee?text=Repuesto+A", codigo:"XYZ-BARCO-01", desc:"Tira Barco S10 2012+ (Alto)", precio:310000 },
-  { imagen:"https://via.placeholder.com/250x220/0f1529/e6e8ee?text=Repuesto+B", codigo:"XYZ-MOTOR-02", desc:"Filtro de Aire Deportivo (Corto)", precio:85000 },
-  { imagen:"https://via.placeholder.com/250x300/0f1529/e6e8ee?text=Repuesto+C", codigo:"ABC-FRENO-03", desc:"Pastillas de Freno Cerámicas (Mediano)", precio:120000 },
-  { imagen:"https://via.placeholder.com/250x260/0f1529/e6e8ee?text=Repuesto+D", codigo:"QWE-LUCES-04", desc:"Faro LED Antiniebla (Medio Corto)", precio:180000 },
-  { imagen:"https://via.placeholder.com/250x420/0f1529/e6e8ee?text=Repuesto+E", codigo:"RTY-RUEDA-05", desc:"Llanta Aleación R17 (Muy Alto)", precio:950000 },
-  { imagen:"https://via.placeholder.com/250x280/0f1529/e6e8ee?text=Repuesto+F", codigo:"FGH-ESPEJO-06", desc:"Espejo Lateral Eléctrico (Cuadrado)", precio:250000 },
-  { imagen:"https://via.placeholder.com/250x350/0f1529/e6e8ee?text=Repuesto+G", codigo:"JKL-SUSPEN-07", desc:"Amortiguador Reforzado (Mediano Alto)", precio:310000 },
-  { imagen:"https://via.placeholder.com/250x200/0f1529/e6e8ee?text=Repuesto+H", codigo:"VBN-BOMBA-08", desc:"Bomba de Agua Completa (Muy Corto)", precio:190000 },
-  { imagen:"https://via.placeholder.com/250x310/0f1529/e6e8ee?text=Repuesto+I", codigo:"ZXC-EMBRA-09", desc:"Kit de Embrague Reforzado (Mediano)", precio:480000 },
-  { imagen:"https://via.placeholder.com/250x270/0f1529/e6e8ee?text=Repuesto+J", codigo:"ASD-DIREC-10", desc:"Caja de Dirección Hidráulica (Medio)", precio:720000 },
-  { imagen:"https://via.placeholder.com/250x400/0f1529/e6e8ee?text=Repuesto+K", codigo:"LMN-ELECT-11", desc:"Alternador de Alto Rendimiento (Alto)", precio:650000 },
-  { imagen:"https://via.placeholder.com/250x230/0f1529/e6e8ee?text=Repuesto+L", codigo:"OPQ-FRENOS-12", desc:"Cilindro Maestro de Freno (Corto)", precio:110000 },
-];
 const money = n => new Intl.NumberFormat('es-PY').format(n) + " Gs";
 const gridElement = document.getElementById("grid");
-gridElement.innerHTML = ITEMS.map(p => `
-  <div class="grid-item">
-    <img src="${p.imagen}" alt="${p.desc}">
-    <div class="info">
-      <div>
-        <div class="codigo">${p.codigo}</div>
-        <div class="desc">${p.desc}</div>
+
+// La clave: Usamos 'fetch' para cargar el archivo data.json
+fetch('data.json')
+  .then(response => {
+    // Verificar que la respuesta sea exitosa
+    if (!response.ok) {
+      throw new Error('No se pudo cargar el archivo data.json');
+    }
+    return response.json();
+  })
+  .then(ITEMS => {
+    // Si la carga fue exitosa, generamos el HTML con los datos
+    gridElement.innerHTML = ITEMS.map(p => `
+      <div class="card">
+        <img src="${p.imagen}" alt="${p.descripcion}">
+        <div class="info">
+          <div class="codigo">${p.codigo}</div>
+          <div class="desc">${p.descripcion}</div>
+          <div class="precio">${money(p.precio)}</div>
+        </div>
       </div>
-      <div class="precio">${money(p.precio)}</div>
-    </div>
-  </div>
-`).join('');
-imagesLoaded(gridElement, function() {
-  new Masonry(gridElement, {
-    itemSelector: '.grid-item',
-    columnWidth: 250,
-    gutter: 15,
-    percentPosition: false,
-    transitionDuration: '0.4s'
+    `).join('');
+  })
+  .catch(error => {
+    // Manejar errores si el archivo no se carga
+    console.error('Error al cargar el catálogo:', error);
+    gridElement.innerHTML = '<p style="text-align:center;">Hubo un error al cargar los productos. Por favor, inténtelo de nuevo más tarde.</p>';
   });
-});
 </script>
 </body>
 </html>
