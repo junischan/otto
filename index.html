@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Otto Repuestos</title>
+<title>Otto Repuestos (Pinterest Style)</title>
 <style>
   body{
     margin:0;
@@ -12,57 +12,78 @@
     font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;
   }
   h1{padding:16px;text-align:center}
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:12px;
-    padding:12px;
+
+  /* Estilos para el layout tipo Pinterest (mampostería) */
+  .grid {
+    display: grid;
+    /* Define columnas de ancho variable, ajustándose automáticamente.
+       La clave es `grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))`
+       para que las columnas se adapten. */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: minmax(10px, auto); /* Permite que las filas se ajusten a las imágenes */
+    gap: 15px; /* Espacio entre los elementos */
+    padding: 15px;
+    box-sizing: border-box; /* Asegura que el padding no añada al ancho total */
   }
-  .card{
+
+  .card {
     background:#141a2a;
     border-radius:10px;
-    overflow:hidden;
     box-shadow:0 3px 10px rgba(0,0,0,.3);
-    display:flex;
-    flex-direction:column;
+    overflow: hidden; /* Importante para que el contenido se ajuste al card */
+    display: flex;
+    flex-direction: column;
+    break-inside: avoid; /* Ayuda a evitar que las tarjetas se rompan entre columnas */
   }
+
   .card img{
-    width:100%;
-    height:180px;          /* altura más alta */
-    object-fit:contain;    /* muestra toda la pieza */
-    object-position:center;
-    background:#0f1529;    /* fondo para rellenar espacios vacíos */
-    display:block;
+    width: 100%;
+    height: auto; /* IMPORTANTE: Quitamos la altura fija para que las imágenes tengan su altura original */
+    display: block;
+    object-fit: contain; /* Asegura que la imagen completa sea visible */
+    object-position: center;
+    background:#0f1529; /* Fondo para rellenar espacios vacíos */
   }
+
   .info{
-    padding:6px 10px;
+    padding:10px; /* Aumentamos el padding para mejor lectura */
     font-size:13px;
+    flex-grow: 1; /* Permite que la información ocupe el espacio restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empuja el precio hacia abajo si es necesario */
   }
-  .info .codigo{font-weight:700;font-size:14px}
-  .info .desc{color:#a7b0c3}
-  .info .precio{font-weight:700;color:#25d366}
+  .info .codigo{font-weight:700;font-size:14px; margin-bottom: 5px;}
+  .info .desc{color:#a7b0c3; margin-bottom: 10px;}
+  .info .precio{font-weight:700;color:#25d366; font-size: 15px;}
 </style>
 </head>
 <body>
-  <h1>Catálogo</h1>
+  <h1>Catálogo Otto Repuestos</h1>
   <div class="grid" id="grid"></div>
 
 <script>
 const ITEMS = [
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-01", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-02", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-03", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-04", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-05", desc:"Tira Barco S10 2012+", precio:310000 },
-  { imagen:"imagen/tira-barco.jpeg", codigo:"XYZ-BARCO-06", desc:"Tira Barco S10 2012+", precio:310000 },
+  { imagen:"https://via.placeholder.com/300x400/0f1529/e6e8ee?text=Repuesto+1", codigo:"XYZ-BARCO-01", desc:"Tira Barco S10 2012+ (Alto)", precio:310000 },
+  { imagen:"https://via.placeholder.com/300x200/0f1529/e6e8ee?text=Repuesto+2", codigo:"XYZ-MOTOR-02", desc:"Filtro de Aire Deportivo (Corto)", precio:85000 },
+  { imagen:"https://via.placeholder.com/300x350/0f1529/e6e8ee?text=Repuesto+3", codigo:"ABC-FRENO-03", desc:"Pastillas de Freno Cerámicas (Mediano)", precio:120000 },
+  { imagen:"https://via.placeholder.com/300x250/0f1529/e6e8ee?text=Repuesto+4", codigo:"QWE-LUCES-04", desc:"Faro LED Antiniebla (Medio Corto)", precio:180000 },
+  { imagen:"https://via.placeholder.com/300x450/0f1529/e6e8ee?text=Repuesto+5", codigo:"RTY-RUEDA-05", desc:"Llanta Aleación R17 (Muy Alto)", precio:950000 },
+  { imagen:"https://via.placeholder.com/300x300/0f1529/e6e8ee?text=Repuesto+6", codigo:"FGH-ESPEJO-06", desc:"Espejo Lateral Eléctrico (Cuadrado)", precio:250000 },
+  { imagen:"https://via.placeholder.com/300x220/0f1529/e6e8ee?text=Repuesto+7", codigo:"JKL-SUSPEN-07", desc:"Amortiguador Reforzado (Corto)", precio:310000 },
+  { imagen:"https://via.placeholder.com/300x380/0f1529/e6e8ee?text=Repuesto+8", codigo:"VBN-BOMBA-08", desc:"Bomba de Agua Completa (Alto)", precio:190000 },
+  { imagen:"https://via.placeholder.com/300x280/0f1529/e6e8ee?text=Repuesto+9", codigo:"ZXC-EMBRA-09", desc:"Kit de Embrague Reforzado (Mediano)", precio:480000 },
+  { imagen:"https://via.placeholder.com/300x420/0f1529/e6e8ee?text=Repuesto+10", codigo:"ASD-DIREC-10", desc:"Caja de Dirección Hidráulica (Muy Alto)", precio:720000 },
 ];
 const money = n => new Intl.NumberFormat('es-PY').format(n) + " Gs";
 document.getElementById("grid").innerHTML = ITEMS.map(p=>`
   <div class="card">
     <img src="${p.imagen}" alt="${p.desc}">
-    <div class="info"> 
-      <div class="codigo">${p.codigo}</div>
-      <div class="desc">${p.desc}</div>
+    <div class="info">
+      <div>
+        <div class="codigo">${p.codigo}</div>
+        <div class="desc">${p.desc}</div>
+      </div>
       <div class="precio">${money(p.precio)}</div>
     </div>
   </div>
