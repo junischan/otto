@@ -1,7 +1,6 @@
 [
   { "codigo": "XYZ-BARCO-a1", "descripcion": "Tira Barco Hilux 2012+", "precio": 310000, "imagen": "imagen/tira-barco-hilux-2004.jpeg" },
   { "codigo": "XYZ-BARCO-02", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/s10-2008.jpeg" },
-  { "codigo": "EB3B-16A263-FA", "descripcion": "col de pato ranger", "precio": 310000, "imagen": ""imagen/cola-de-pato-ranger.jpg" },
   { "codigo": "XYZ-BARCO-04", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
   { "codigo": "XYZ-BARCO-05", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
   { "codigo": "XYZ-BARCO-06", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
