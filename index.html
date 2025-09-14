@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Catálogo de repuestos automotrices Otto Repuestos, encuentra frenos, aceites, llantas y más.">
-  <meta name="keywords" content="repuestos, automotriz, Otto Repuestos, frenos, llantas, aceites">
+  <meta name="description" content="Catálogo de repuestos automotrices Otto Repuestos, encuentra tiras de barco, soportes y más.">
+  <meta name="keywords" content="repuestos, automotriz, Otto Repuestos, tiras de barco, soportes, accesorios">
   <title>Otto Repuestos</title>
   <style>
     :root {
@@ -530,42 +530,17 @@
       } catch (error) {
         console.warn('Cargando datos de ejemplo:', error.message);
         ITEMS = [
-          {
-            codigo: "FR001",
-            descripcion: "Freno de disco delantero Toyota Corolla 2015-2020",
-            precio: 450000,
-            imagen: "https://via.placeholder.com/300x200/333/fff?text=Freno+Disco"
-          },
-          {
-            codigo: "MT002",
-            descripcion: "Motor de arranque Nissan Sentra 1.8L",
-            precio: 320000,
-            imagen: "https://via.placeholder.com/300x200/333/fff?text=Motor+Arranque"
-          },
-          {
-            codigo: "AC003",
-            descripcion: "Aceite motor sintético 5W-30 4L",
-            precio: 180000,
-            imagen: "https://via.placeholder.com/300x200/333/fff?text=Aceite+Motor"
-          },
-          {
-            codigo: "FL004",
-            descripcion: "Filtro de aire Honda Civic 2016-2021",
-            precio: 85000,
-            imagen: "https://via.placeholder.com/300x200/333/fff?text=Filtro+Aire"
-          },
-          {
-            codigo: "BA005",
-            descripcion: "Batería 12V 60Ah libre mantenimiento",
-            precio: 280000,
-            imagen: "https://via.placeholder.com/300x200/333/fff?text=Bateria+12V"
-          },
-          {
-            codigo: "LL006",
-            descripcion: "Llantas 195/65R15 Michelin Energy Saver",
-            precio: 350000,
-            imagen: "https://via.placeholder.com/300x200/333/fff?text=Llantas+195"
-          }
+          { "codigo": "XYZ-BARCO-a1", "descripcion": "Tira Barco Hilux 2012+", "precio": 310000, "imagen": "imagen/tira-barco-hilux-2004.jpeg" },
+          { "codigo": "XYZ-BARCO-02", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/s10-2008.jpeg" },
+          { "codigo": "XYZ-BARCO-04", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/20250908_150257.jpg" },
+          { "codigo": "XYZ-BARCO-05", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/punteraranger2013licrocs.jpg" },
+          { "codigo": "XYZ-BARCO-06", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/20250911_135258.jpg" },
+          { "codigo": "XYZ-BARCO-07", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
+          { "codigo": "XYZ-BARCO-08", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
+          { "codigo": "XYZ-BARCO-09", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
+          { "codigo": "XYZ-BARCO-10", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
+          { "codigo": "XYZ-BARCO-11", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tomacorrienteranger025.jpg" },
+          { "codigo": "XYZ-BARCO-12", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/soporteantenaranger025.jpg" }
         ];
       }
       initializeCatalog();
@@ -731,10 +706,4 @@
       } else {
         // Fallback: copiar al portapapeles
         const text = `${codigo} - ${descripcion}\n${window.location.href}`;
-        navigator.clipboard.writeText(text).then(() => {
-          alert('Información copiada al portapapeles');
-        });
-      }
-    }
-
-    // Agre
+        navigato
