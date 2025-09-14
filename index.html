@@ -330,7 +330,7 @@
     window.sendWhatsApp = sendWhatsApp;
     window.shareProduct = shareProduct;
 
-    // ========= CARRITO =========
+   // ========= CARRITO =========
     function addToCart(data) {
       const item = {
         codigo: data.codigo,
@@ -377,4 +377,48 @@
     function incQty(i){ cart[i].cantidad++; persistCart(); updateCartCount(); }
     function decQty(i){ cart[i].cantidad = Math.max(1, cart[i].cantidad-1); persistCart(); updateCartCount(); }
     function removeItem(i){ cart.splice(i,1); persistCart(); updateCartCount(); }
-    window.incQty = incQty; window.decQty = decQty; window.removeItem = removeIte
+    window.incQty = incQty; window.decQty = decQty; window.removeItem = removeItem;
+
+    elements.cartFloat.addEventListener('click', openCart);
+    document.querySelector('.modal-close').addEventListener('click', closeCart);
+    elements.cartModal.addEventListener('click', (e)=>{ if (e.target===elements.cartModal) closeCart(); });
+    function openCart(){ elements.cartModal.classList.add('active'); renderCart(); }
+    function closeCart(){ elements.cartModal.classList.remove('active'); }
+    elements.sendCart.addEventListener('click', () => {
+      if (!cart.length) return;
+      const lines = cart.map(it => `• ${it.codigo} x${it.cantidad} — ${formatPrice(it.precio*it.cantidad)}`).join('\n');
+      const total = cart.reduce((s,it)=> s + it.precio*it.cantidad, 0);
+      const msg = `¡Hola! Quiero hacer este pedido:\n\n${lines}\n\nTOTAL: ${formatPrice(total)}\n\n¿Disponibilidad y plazo de entrega?`;
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    });
+
+    // ========= ACCESIBILIDAD / TECLAS =========
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeLightbox(); closeCart(); }
+    });
+
+    // ========= VERIFICADOR DE IMÁGENES =========
+    async function verifyAssets() {
+      const results = await Promise.all(
+        ITEMS.map(i => new Promise(res => {
+          const img = new Image();
+          img.onload = () => res({ codigo:i.codigo, ok:true });
+          img.onerror = () => res({ codigo:i.codigo, ok:false, path:i.imagen });
+          img.src = resolveImage(i.imagen);
+        }))
+      );
+      const rotas = results.filter(r => !r.ok);
+      if (rotas.length) {
+        console.warn("Imágenes que no cargaron:", rotas);
+        elements.noResults.style.display = 'block';
+        elements.noResults.textContent = `Atención: ${rotas.length} imagen(es) no se encontraron (mirá la consola para ver cuáles).`;
+        setTimeout(()=>{ elements.noResults.style.display='none'; }, 4500);
+      }
+    }
+
+    // ========= INICIO =========
+    loadData();
+  </script>
+</body>
+</html>
