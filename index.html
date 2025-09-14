@@ -487,22 +487,7 @@
       sendCart: document.getElementById("sendCart")
     };
 
-    let ITEMS = [
-      // Tus datos de práctica. Nota: Muchas descripciones son repetidas ("Tira Barco S10 2012+").
-      // Puedes diversificarlas para que el catálogo sea más claro, por ejemplo:
-      // { codigo: "XYZ-BARCO-02", descripcion: "Tira Barco S10 2012+ Modelo Standard", ... }
-      { codigo: "XYZ-BARCO-a1", descripcion: "Tira Barco Hilux 2012+", precio: 310000, imagen: "https://via.placeholder.com/300x200/333/fff?text=Tira+Barco+Hilux" },
-      { codigo: "XYZ-BARCO-02", descripcion: "Tira Barco S10 2012+", precio: 310000, imagen: "https://via.placeholder.com/300x200/333/fff?text=Tira+Barco+S10" },
-      { codigo: "XYZ-BARCO-04", descripcion: "Tira Barco S10 2012+", precio: 310000, imagen: "https://via.placeholder.com/300x200/333/fff?text=Tira+Barco+S10" },
-      { codigo: "XYZ-BARCO-05", descripcion: "Tira Barco S10 2012+", precio: 310000, imagen: "https://via.placeholder.com/300x200/333/fff?text=Puntera+Ranger" },
-      { codigo: "XYZ-BARCO-06", descripcion: "Tira Barco S10 2012+", precio: 310000, imagen: "https://via.placeholder.com/300x200/333/fff?text=Tira+Barco+S10" },
-      { codigo: "XYZ-BARCO-07", descripcion: "Tira Barco S10 2012+", precio: 310000, imagen: "https://via.placeholder.com/300x200/333/fff?text=Tira+Barco" },
-      { codigo: "XYZ-BARCO-08", descripcion: "Tira Barco S10 2012+", precio: 310000, imagen: "https://via.placeholder.com/300x200/333/fff?text=Tira+Barco" },
-      { codigo: "XYZ-BARCO-09", descripcion: "Tira Barco S10 2012+", precio: 310000, imagen: "https://via.placeholder.com/300x200/333/fff?text=Tira+Barco" },
-      { codigo: "XYZ-BARCO-10", descripcion: "Tira Barco S10 2012+", precio: 310000, imagen: "https://via.placeholder.com/300x200/333/fff?text=Tira+Barco" },
-      { codigo: "XYZ-BARCO-11", descripcion: "Tira Barco S10 2012+", precio: 310000, imagen: "https://via.placeholder.com/300x200/333/fff?text=Tomacorriente+Ranger" },
-      { codigo: "XYZ-BARCO-12", descripcion: "Tira Barco S10 2012+", precio: 310000, imagen: "https://via.placeholder.com/300x200/333/fff?text=Soporte+Antena+Ranger" }
-    ];
+    let ITEMS = [];
     let filteredItems = [];
     let cart = JSON.parse(localStorage.getItem('ottocart') || '[]');
 
@@ -522,6 +507,33 @@
     function updateCartCount() {
       elements.cartCount.textContent = cart.length;
       elements.cartCount.style.display = cart.length > 0 ? 'flex' : 'none';
+    }
+
+    // Cargar datos desde data.json
+    async function loadData() {
+      try {
+        const response = await fetch('data.json');
+        if (!response.ok) throw new Error('No se pudo cargar data.json');
+        ITEMS = await response.json();
+        localStorage.setItem('ottoData', JSON.stringify(ITEMS));
+      } catch (error) {
+        console.warn('Cargando datos de respaldo:', error.message);
+        // Datos de respaldo (tus datos de práctica)
+        ITEMS = [
+          { "codigo": "XYZ-BARCO-a1", "descripcion": "Tira Barco Hilux 2012+", "precio": 310000, "imagen": "imagen/tira-barco-hilux-2004.jpeg" },
+          { "codigo": "XYZ-BARCO-02", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/s10-2008.jpeg" },
+          { "codigo": "XYZ-BARCO-04", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/20250908_150257.jpg" },
+          { "codigo": "XYZ-BARCO-05", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/punteraranger2013licrocs.jpg" },
+          { "codigo": "XYZ-BARCO-06", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/20250911_135258.jpg" },
+          { "codigo": "XYZ-BARCO-07", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
+          { "codigo": "XYZ-BARCO-08", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
+          { "codigo": "XYZ-BARCO-09", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
+          { "codigo": "XYZ-BARCO-10", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
+          { "codigo": "XYZ-BARCO-11", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tomacorrienteranger025.jpg" },
+          { "codigo": "XYZ-BARCO-12", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/soporteantenaranger025.jpg" }
+        ];
+      }
+      initializeCatalog();
     }
 
     // Inicializar catálogo
@@ -692,4 +704,4 @@
 
     // Agregar al carrito
     function addToCart(item) {
-      const e
+      const exists = cart.find(ca
