@@ -81,9 +81,7 @@
 
   <main>
     <div class="controls">
-      <div class="filter-buttons" id="categoryFilters">
-        <!-- Botones de categorías se generan dinámicamente -->
-      </div>
+      <div class="filter-buttons" id="categoryFilters"><!-- se llena dinámicamente --></div>
       <div class="stats"><span id="itemCount">0</span> productos encontrados</div>
     </div>
 
@@ -119,11 +117,14 @@
   </div>
 
   <script>
-    // ========= CONFIG =========
+    /* ====== CONFIG ====== */
     const WHATSAPP_NUMBER = '595986803963'; // tu número
-    const DATA_JSON_URL = 'data.json?v=3';
+    const DATA_JSON_URL = 'data.json?v=5';
     const IMG_BASE = './';
+    // Categorías fijas para practicar
+    const CATEGORIES = ['Mecánica', 'Accesorios', 'Paragolpes', 'Eléctrica y Electrónica'];
 
+    /* ====== ELEMENTOS ====== */
     const elements = {
       grid: document.getElementById("grid"),
       categoryFilters: document.getElementById("categoryFilters"),
@@ -143,22 +144,30 @@
       sendCart: document.getElementById("sendCart")
     };
 
+    /* ====== ESTADO ====== */
     let ITEMS = [];
     let filteredItems = [];
     let cart = JSON.parse(localStorage.getItem('ottocart') || '[]');
-
-    const formatPrice = (n) => new Intl.NumberFormat('es-PY').format(n) + " Gs";
-    const debounce = (func, wait) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>func(...a),wait); }; };
-
-    function resolveImage(path) {
-      const safe = encodeURI(path || '');
-      const base = new URL(IMG_BASE, document.baseURI);
-      return new URL(safe, base).href;
-    }
-/* ====== ESTADO ====== */
     let currentCategory = 'Todos', currentQuery = '', currentSort = 'none';
 
-    /* ====== CARGA ====== */
+    /* ====== HELPERS ====== */
+    const formatPrice = (n) => new Intl.NumberFormat('es-PY').format(n||0) + " Gs";
+    const debounce = (f, w) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>f(...a),w); }; };
+    function resolveImage(path){ const safe=encodeURI(path||''); const base=new URL(IMG_BASE, document.baseURI); return new URL(safe, base).href; }
+    function escapeHTML(s){return String(s||'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));}
+    function jsStr(s){return String(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\n/g,'\\n');}
+
+    // Inferencia básica cuando falta "categoria" (sirve para practicar)
+    function inferCategory(p){
+      const text = `${p.descripcion||''} ${p.codigo||''} ${p.imagen||''}`.toLowerCase();
+      if (/-paragolpe/.test(text) || /\bparagolpe(s)?\b/.test(text)) return 'Paragolpes';
+      if (/electricayelectronica/.test(text) || /\bel[eé]ctrica\b|\belectr[oó]nica\b/.test(text)) return 'Eléctrica y Electrónica';
+      if (/-mecanica/.test(text) || /\bmec[aá]nica\b/.test(text) || /\bfiltro\b|\baceite\b|\bhomoc[ií]n/.test(text)) return 'Mecánica';
+      if (/-accesorio/.test(text) || /\baccesorio(s)?\b/.test(text) || /tira barco/.test(text)) return 'Accesorios';
+      return 'Accesorios';
+    }
+    function getCategory(p){ return p.categoria || inferCategory(p); }
+    /* ====== CARGA DE DATOS ====== */
     async function loadData() {
       elements.loading.style.display = 'block';
       try {
@@ -187,16 +196,15 @@
       wireLightbox();
     }
 
-    /* ====== CATEGORÍAS DINÁMICAS ====== */
-    function renderCategoryFilters(){
-      const set = new Set(ITEMS.map(p => p.categoria || 'Otros'));
-      const cats = ['Todos', ...[...set].sort((a,b)=>a.localeCompare(b))];
-      elements.categoryFilters.innerHTML = cats.map((c,i)=>`
-        <button class="filter-btn ${i? '' : 'active'}" data-cat="${c}" aria-pressed="${i? 'false':'true'}">${c}</button>
-      `).join('');
-      elements.categoryFilters.querySelectorAll('.filter-btn').forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          elements.categoryFilters.querySelectorAll('.filter-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false');});
+    /* ====== CABECERA DE CATEGORÍAS (FIJAS) ====== */
+    function renderCategoryFilters() {
+      const cats = ['Todos', ...CATEGORIES];
+      elements.categoryFilters.innerHTML = cats.map((c,idx) =>
+        `<button class="filter-btn ${idx===0?'active':''}" data-cat="${c}" aria-pressed="${idx===0?'true':'false'}">${c}</button>`
+      ).join('');
+      elements.categoryFilters.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          elements.categoryFilters.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
           btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
           currentCategory = btn.dataset.cat;
           applyFilters();
@@ -204,7 +212,7 @@
       });
     }
 
-    /* ====== ORDEN ====== */
+    /* ====== BARRA DE ORDEN ====== */
     function buildSortBar(){
       const bar = document.createElement('div');
       bar.className='filter-buttons'; bar.id='sortBar'; bar.style.marginTop='6px';
@@ -238,7 +246,7 @@
 
     /* ====== APLICAR FILTROS ====== */
     function applyFilters(){
-      let items = (currentCategory==='Todos') ? [...ITEMS] : ITEMS.filter(p=> (p.categoria||'Otros')===currentCategory);
+      let items = (currentCategory==='Todos') ? [...ITEMS] : ITEMS.filter(p=> getCategory(p) === currentCategory);
       if (currentQuery){
         const q=currentQuery;
         items = items.filter(p =>
@@ -256,14 +264,12 @@
     }
 
     /* ====== RENDER ====== */
-    function escapeHTML(s){return String(s||'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));}
-    function jsStr(s){return String(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\n/g,'\\n');}
-
     function renderItems(){
       if (!filteredItems.length){
         elements.grid.style.display='none'; elements.noResults.style.display='block'; elements.itemCount.textContent='0'; return;
       }
       elements.grid.style.display='block'; elements.noResults.style.display='none'; elements.itemCount.textContent=filteredItems.length;
+
       elements.grid.innerHTML = filteredItems.map(p=>`
         <article class="card" data-fullimage="${resolveImage(p.imagen)}" data-codigo="${escapeHTML(p.codigo)}" data-desc="${escapeHTML(p.descripcion)}" data-precio="${p.precio||0}">
           <img src="${resolveImage(p.imagen)}" alt="${escapeHTML(p.descripcion)}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x200/333/fff?text=Sin+Imagen'">
@@ -277,6 +283,7 @@
             <button class="btn btn-share" onclick="shareProduct('${jsStr(p.codigo)}','${jsStr(p.descripcion)}')">📤 Compartir</button>
           </div>
         </article>`).join('');
+
       document.querySelectorAll(".card").forEach(card=>{
         card.querySelector('img').addEventListener('click',e=>{e.stopPropagation(); openLightbox(card);});
         card.addEventListener('dblclick',()=>{ addToCart(card.dataset); toastAdded(card); });
@@ -367,10 +374,10 @@
     /* ====== VERIFICADOR ====== */
     async function verifyAssets(){
       if (!ITEMS.length) return;
-      const checks = await Promise.all(ITEMS.map(i=>new Promise(res=>{
+      const results = await Promise.all(ITEMS.map(i=>new Promise(res=>{
         const img=new Image(); img.onload=()=>res(true); img.onerror=()=>res(false); img.src=resolveImage(i.imagen);
       })));
-      const bad = checks.filter(ok=>!ok).length;
+      const bad = results.filter(ok=>!ok).length;
       if (bad){
         elements.noResults.style.display='block';
         elements.noResults.textContent=`Atención: ${bad} imagen(es) no se encontraron (ver consola).`;
@@ -379,6 +386,7 @@
     }
 
     /* ====== INICIO ====== */
+    function updateCartCount(){ elements.cartCount.textContent = cart.length; elements.cartCount.style.display = cart.length ? 'flex' : 'none'; }
     loadData();
   </script>
 </body>
