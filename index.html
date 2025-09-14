@@ -6,6 +6,7 @@
   <meta name="description" content="Catálogo de repuestos automotrices Otto Repuestos (práctica).">
   <meta name="keywords" content="repuestos, automotriz, Otto Repuestos, tiras de barco, práctica">
   <title>Otto Repuestos - Práctica</title>
+  <base href="./">
   <style>
     :root {
       --primary-bg: #0b0f19;
@@ -16,396 +17,57 @@
       --shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
       --font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
     }
-
-    body {
-      margin: 0;
-      background: var(--primary-bg);
-      color: var(--text-color);
-      font-family: var(--font-family);
-    }
-
-    /* Soporte para modo claro */
+    body { margin: 0; background: var(--primary-bg); color: var(--text-color); font-family: var(--font-family); }
     @media (prefers-color-scheme: light) {
-      :root {
-        --primary-bg: #f5f5f5;
-        --card-bg: #ffffff;
-        --text-color: #333;
-        --border-color: #ccc;
-      }
+      :root { --primary-bg:#f5f5f5; --card-bg:#fff; --text-color:#333; --border-color:#ccc; }
     }
-
-    /* Header con buscador */
-    .header {
-      padding: 20px;
-      background: var(--card-bg);
-      box-shadow: var(--shadow);
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2em;
-      margin: 0 0 20px 0;
-    }
-
-    .search-container {
-      max-width: 500px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 12px 50px 12px 20px;
-      border: 2px solid var(--border-color);
-      border-radius: 25px;
-      background: var(--primary-bg);
-      color: var(--text-color);
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: var(--accent-color);
-    }
-
-    .search-clear {
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: #a7b0c3;
-      cursor: pointer;
-      font-size: 18px;
-      display: none;
-    }
-
-    .search-clear:hover {
-      color: var(--text-color);
-    }
-
-    /* Filtros y estadísticas */
-    .controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .filter-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      padding: 8px 16px;
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      background: var(--card-bg);
-      color: var(--text-color);
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 12px;
-    }
-
-    .filter-btn:hover,
-    .filter-btn.active {
-      background: var(--accent-color);
-      border-color: var(--accent-color);
-      color: #000;
-    }
-
-    .stats {
-      font-size: 12px;
-      color: #a7b0c3;
-    }
-
-    .grid {
-      column-count: 2;
-      column-gap: 15px;
-      padding: 15px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 10px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      margin-bottom: 15px;
-      display: inline-block;
-      width: 100%;
-      break-inside: avoid;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(0, 0, 0, .4);
-    }
-
-    .card img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      display: block;
-      background: #0f1529;
-    }
-
-    .info {
-      padding: 10px;
-      font-size: 13px;
-    }
-
-    .info .codigo {
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .info .desc {
-      color: #a7b0c3;
-      font-size: 11px;
-      margin-top: 5px;
-      margin-bottom: 10px;
-    }
-
-    .info .precio {
-      font-weight: 700;
-      color: var(--accent-color);
-      font-size: 15px;
-    }
-
-    /* Botones de acción en cada card */
-    .card-actions {
-      padding: 0 10px 10px;
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn {
-      flex: 1;
-      padding: 8px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 11px;
-      font-weight: 600;
-      transition: all 0.2s;
-    }
-
-    .btn-whatsapp {
-      background: var(--accent-color);
-      color: #000;
-    }
-
-    .btn-whatsapp:hover {
-      background: #1ea952;
-    }
-
-    .btn-share {
-      background: var(--border-color);
-      color: var(--text-color);
-    }
-
-    .btn-share:hover {
-      background: #3a4551;
-    }
-
-    /* Carrito flotante */
-    .cart-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--accent-color);
-      color: #000;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-      z-index: 999;
-      font-size: 24px;
-      transition: all 0.3s;
-    }
-
-    .cart-float:hover {
-      transform: scale(1.1);
-    }
-
-    .cart-count {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background: #ff4444;
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      font-size: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-
-    /* Loading */
-    .loading {
-      text-align: center;
-      padding: 50px;
-      font-size: 16px;
-      color: #a7b0c3;
-    }
-
-    .no-results {
-      text-align: center;
-      padding: 50px;
-      color: #a7b0c3;
-    }
-
-    @media (min-width: 600px) {
-      .grid {
-        column-count: 3;
-      }
-    }
-    @media (min-width: 900px) {
-      .grid {
-        column-count: 4;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .controls {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .filter-buttons {
-        justify-content: center;
-      }
-    }
-
-    /* Estilos para el Lightbox */
-    .lightbox {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.3s, visibility 0.3s;
-    }
-
-    .lightbox.active {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .lightbox-content {
-      position: relative;
-      max-width: 90%;
-      max-height: 90%;
-    }
-
-    .lightbox img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      background: transparent;
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: -40px;
-      right: 0;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 30px;
-      cursor: pointer;
-      z-index: 1001;
-    }
-
-    .lightbox-info {
-      position: absolute;
-      bottom: -80px;
-      left: 0;
-      right: 0;
-      background: rgba(20, 26, 42, 0.9);
-      padding: 15px;
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    /* Modal para carrito */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-
-    .modal.active {
-      display: flex;
-    }
-
-    .modal-content {
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 500px;
-      width: 90%;
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: none;
-      border: none;
-      color: var(--text-color);
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    .modal-total {
-      margin-top: 20px;
-      font-weight: bold;
-    }
-
-    .cart-item {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 10px;
-    }
-
-    .cart-item img {
-      width: 50px;
-      height: auto;
-    }
+    .header { padding:20px; background:var(--card-bg); box-shadow:var(--shadow); }
+    h1 { text-align:center; font-size:2em; margin:0 0 20px 0; }
+    .search-container { max-width:500px; margin:0 auto; position:relative; }
+    .search-input { width:100%; padding:12px 50px 12px 20px; border:2px solid var(--border-color); border-radius:25px; background:var(--primary-bg); color:var(--text-color); font-size:16px; box-sizing:border-box; }
+    .search-input:focus { outline:none; border-color:var(--accent-color); }
+    .search-clear { position:absolute; right:15px; top:50%; transform:translateY(-50%); background:none; border:none; color:#a7b0c3; cursor:pointer; font-size:18px; display:none; }
+    .search-clear:hover{ color:var(--text-color); }
+    .controls { display:flex; justify-content:space-between; align-items:center; padding:15px; flex-wrap:wrap; gap:10px; }
+    .filter-buttons { display:flex; gap:10px; flex-wrap:wrap; }
+    .filter-btn { padding:8px 16px; border:1px solid var(--border-color); border-radius:20px; background:var(--card-bg); color:var(--text-color); cursor:pointer; transition:.3s; font-size:12px; }
+    .filter-btn:hover,.filter-btn.active{ background:var(--accent-color); border-color:var(--accent-color); color:#000; }
+    .stats { font-size:12px; color:#a7b0c3; }
+    .grid{ column-count:2; column-gap:15px; padding:15px; }
+    .card{ background:var(--card-bg); border-radius:10px; box-shadow:var(--shadow); overflow:hidden; margin-bottom:15px; display:inline-block; width:100%; break-inside:avoid; cursor:pointer; transition:transform .2s, box-shadow .2s; position:relative; }
+    .card:hover{ transform:translateY(-2px); box-shadow:0 5px 20px rgba(0,0,0,.4); }
+    .card img{ width:100%; height:auto; object-fit:cover; display:block; background:#0f1529; }
+    .info{ padding:10px; font-size:13px; }
+    .info .codigo{ font-weight:700; font-size:14px; }
+    .info .desc{ color:#a7b0c3; font-size:11px; margin-top:5px; margin-bottom:10px; }
+    .info .precio{ font-weight:700; color:var(--accent-color); font-size:15px; }
+    .card-actions{ padding:0 10px 10px; display:flex; gap:8px; }
+    .btn{ flex:1; padding:8px; border:none; border-radius:5px; cursor:pointer; font-size:11px; font-weight:600; transition:.2s; }
+    .btn-whatsapp{ background:var(--accent-color); color:#000; }
+    .btn-whatsapp:hover{ background:#1ea952; }
+    .btn-share{ background:var(--border-color); color:var(--text-color); }
+    .btn-share:hover{ background:#3a4551; }
+    .cart-float{ position:fixed; bottom:20px; right:20px; background:var(--accent-color); color:#000; border-radius:50%; width:60px; height:60px; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 15px rgba(37,211,102,.3); z-index:999; font-size:24px; transition:.3s; }
+    .cart-float:hover{ transform:scale(1.1); }
+    .cart-count{ position:absolute; top:-5px; right:-5px; background:#ff4444; color:#fff; border-radius:50%; width:20px; height:20px; font-size:10px; display:flex; align-items:center; justify-content:center; font-weight:bold; }
+    .loading{text-align:center; padding:50px; font-size:16px; color:#a7b0c3;}
+    .no-results{text-align:center; padding:50px; color:#a7b0c3;}
+    @media (min-width:600px){ .grid{ column-count:3; } }
+    @media (min-width:900px){ .grid{ column-count:4; } }
+    @media (max-width:600px){ .controls{ flex-direction:column; align-items:stretch; } .filter-buttons{ justify-content:center; } }
+    .lightbox{ position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.9); display:flex; justify-content:center; align-items:center; z-index:1000; visibility:hidden; opacity:0; transition:opacity .3s, visibility .3s; }
+    .lightbox.active{ visibility:visible; opacity:1; }
+    .lightbox-content{ position:relative; max-width:90%; max-height:90%; }
+    .lightbox img{ max-width:100%; max-height:100%; object-fit:contain; background:transparent; }
+    .lightbox-close{ position:absolute; top:-40px; right:0; background:none; border:none; color:#fff; font-size:30px; cursor:pointer; z-index:1001; }
+    .lightbox-info{ position:absolute; bottom:-80px; left:0; right:0; background:rgba(20,26,42,.9); padding:15px; border-radius:8px; text-align:center; }
+    .modal{ position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index:1000; }
+    .modal.active{ display:flex; }
+    .modal-content{ background:var(--card-bg); padding:20px; border-radius:10px; max-width:500px; width:90%; position:relative; }
+    .modal-close{ position:absolute; top:10px; right:10px; background:none; border:none; color:var(--text-color); font-size:20px; cursor:pointer; }
+    .modal-total{ margin-top:20px; font-weight:bold; }
+    .cart-item{ display:flex; gap:10px; margin-bottom:10px; border-bottom:1px solid var(--border-color); padding-bottom:10px; }
+    .cart-item img{ width:50px; height:auto; }
   </style>
 </head>
 <body>
@@ -425,25 +87,18 @@
         <button class="filter-btn" data-filter="price-high" aria-pressed="false">Precio Alto</button>
         <button class="filter-btn" data-filter="recent" aria-pressed="false">Recientes</button>
       </div>
-      <div class="stats">
-        <span id="itemCount">0</span> productos encontrados
-      </div>
+      <div class="stats"><span id="itemCount">0</span> productos encontrados</div>
     </div>
 
     <div id="loading" class="loading">Cargando productos...</div>
     <section class="grid" id="grid" role="region" aria-live="polite"></section>
-    <div id="noResults" class="no-results" style="display: none;">
-      No se encontraron productos que coincidan con tu búsqueda
-    </div>
+    <div id="noResults" class="no-results" style="display: none;">No se encontraron productos que coincidan con tu búsqueda</div>
   </main>
 
-  <!-- Carrito flotante -->
-  <div class="cart-float" id="cartFloat" role="button" aria-label="Ver carrito">
-    🛒
+  <div class="cart-float" id="cartFloat" role="button" aria-label="Ver carrito">🛒
     <span class="cart-count" id="cartCount">0</span>
   </div>
 
-  <!-- Lightbox -->
   <div id="lightbox" class="lightbox" role="dialog" aria-label="Vista ampliada del producto" tabindex="-1">
     <div class="lightbox-content">
       <button class="lightbox-close" aria-label="Cerrar vista ampliada">&times;</button>
@@ -456,7 +111,6 @@
     </div>
   </div>
 
-  <!-- Modal para carrito -->
   <div id="cartModal" class="modal" role="dialog" aria-label="Vista del carrito">
     <div class="modal-content">
       <button class="modal-close" aria-label="Cerrar carrito">&times;</button>
@@ -468,7 +122,12 @@
   </div>
 
   <script>
-    // Variables globales
+    // ========= CONFIG =========
+    const WHATSAPP_NUMBER = 'TU_NUMERO_WHATSAPP'; // p.ej. 595981123456
+    const DATA_JSON_URL = 'data.json?v=2'; // cache bust
+    const IMG_BASE = './'; // si usás /assets/ cambiá aquí
+
+    // ========= ELEMENTOS =========
     const elements = {
       grid: document.getElementById("grid"),
       lightbox: document.getElementById("lightbox"),
@@ -487,221 +146,11 @@
       sendCart: document.getElementById("sendCart")
     };
 
+    // ========= ESTADO =========
     let ITEMS = [];
     let filteredItems = [];
     let cart = JSON.parse(localStorage.getItem('ottocart') || '[]');
 
-    // Función para formatear precios
+    // ========= HELPERS =========
     const formatPrice = (n) => new Intl.NumberFormat('es-PY').format(n) + " Gs";
-
-    // Debounce para búsqueda
-    const debounce = (func, wait) => {
-      let timeout;
-      return (...args) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), wait);
-      };
-    };
-
-    // Actualizar contador del carrito
-    function updateCartCount() {
-      elements.cartCount.textContent = cart.length;
-      elements.cartCount.style.display = cart.length > 0 ? 'flex' : 'none';
-    }
-
-    // Cargar datos desde data.json
-    async function loadData() {
-      try {
-        const response = await fetch('data.json');
-        if (!response.ok) throw new Error('No se pudo cargar data.json');
-        ITEMS = await response.json();
-        localStorage.setItem('ottoData', JSON.stringify(ITEMS));
-      } catch (error) {
-        console.warn('Cargando datos de respaldo:', error.message);
-        // Datos de respaldo (tus datos de práctica)
-        ITEMS = [
-          { "codigo": "XYZ-BARCO-a1", "descripcion": "Tira Barco Hilux 2012+", "precio": 310000, "imagen": "imagen/tira-barco-hilux-2004.jpeg" },
-          { "codigo": "XYZ-BARCO-02", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/s10-2008.jpeg" },
-          { "codigo": "XYZ-BARCO-04", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/20250908_150257.jpg" },
-          { "codigo": "XYZ-BARCO-05", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/punteraranger2013licrocs.jpg" },
-          { "codigo": "XYZ-BARCO-06", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/20250911_135258.jpg" },
-          { "codigo": "XYZ-BARCO-07", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
-          { "codigo": "XYZ-BARCO-08", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
-          { "codigo": "XYZ-BARCO-09", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
-          { "codigo": "XYZ-BARCO-10", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
-          { "codigo": "XYZ-BARCO-11", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tomacorrienteranger025.jpg" },
-          { "codigo": "XYZ-BARCO-12", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/soporteantenaranger025.jpg" }
-        ];
-      }
-      initializeCatalog();
-    }
-
-    // Inicializar catálogo
-    function initializeCatalog() {
-      elements.loading.style.display = 'none';
-      filteredItems = [...ITEMS];
-      renderItems();
-      updateCartCount();
-    }
-
-    // Renderizar productos
-    function renderItems() {
-      if (filteredItems.length === 0) {
-        elements.grid.style.display = 'none';
-        elements.noResults.style.display = 'block';
-        elements.itemCount.textContent = '0';
-        return;
-      }
-
-      elements.grid.style.display = 'block';
-      elements.noResults.style.display = 'none';
-      elements.itemCount.textContent = filteredItems.length;
-
-      elements.grid.innerHTML = filteredItems.map(p => `
-        <article class="card" data-fullimage="${p.imagen}" data-codigo="${p.codigo}" data-desc="${p.descripcion}" data-precio="${p.precio}">
-          <img src="${p.imagen}" alt="${p.descripcion}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x200/333/fff?text=Sin+Imagen'">
-          <div class="info">
-            <div class="codigo">${p.codigo}</div>
-            <div class="desc">${p.descripcion}</div>
-            <div class="precio">${formatPrice(p.precio)}</div>
-          </div>
-          <div class="card-actions">
-            <button class="btn btn-whatsapp" onclick="sendWhatsApp('${p.codigo}', '${p.descripcion}', ${p.precio})" aria-label="Contactar por WhatsApp para ${p.codigo}">
-              💬 WhatsApp
-            </button>
-            <button class="btn btn-share" onclick="shareProduct('${p.codigo}', '${p.descripcion}')" aria-label="Compartir ${p.codigo}">
-              📤 Compartir
-            </button>
-          </div>
-        </article>
-      `).join('');
-
-      // Agregar event listeners para el lightbox
-      const cards = document.querySelectorAll(".card");
-      cards.forEach(card => {
-        const img = card.querySelector('img');
-        img.addEventListener("click", (e) => {
-          e.stopPropagation();
-          openLightbox(card);
-        });
-
-        // Agregar al carrito al hacer doble clic
-        card.addEventListener("dblclick", () => {
-          addToCart(card.dataset);
-        });
-      });
-    }
-
-    // Abrir lightbox con información
-    function openLightbox(card) {
-      const fullImageUrl = card.getAttribute("data-fullimage");
-      const codigo = card.getAttribute("data-codigo");
-      const desc = card.getAttribute("data-desc");
-      const precio = card.getAttribute("data-precio");
-
-      elements.lightboxImage.src = fullImageUrl;
-      elements.lightboxImage.alt = `Imagen ampliada de ${desc}`;
-      elements.lightboxInfo.querySelector('.codigo').textContent = codigo;
-      elements.lightboxInfo.querySelector('.desc').textContent = desc;
-      elements.lightboxInfo.querySelector('.precio').textContent = formatPrice(parseInt(precio));
-
-      elements.lightbox.classList.add("active");
-      elements.lightbox.focus(); // Foco para accesibilidad
-    }
-
-    // Cerrar lightbox
-    function closeLightbox() {
-      elements.lightbox.classList.remove("active");
-    }
-
-    // Búsqueda en tiempo real con debounce
-    elements.searchInput.addEventListener('input', debounce((e) => {
-      const query = e.target.value.toLowerCase().trim();
-
-      if (query) {
-        elements.searchClear.style.display = 'block';
-        filteredItems = ITEMS.filter(item =>
-          item.codigo.toLowerCase().includes(query) ||
-          item.descripcion.toLowerCase().includes(query)
-        );
-      } else {
-        elements.searchClear.style.display = 'none';
-        filteredItems = [...ITEMS];
-      }
-
-      renderItems();
-    }, 300));
-
-    // Limpiar búsqueda
-    elements.searchClear.addEventListener('click', () => {
-      elements.searchInput.value = '';
-      elements.searchClear.style.display = 'none';
-      filteredItems = [...ITEMS];
-      renderItems();
-    });
-
-    // Filtros
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.filter-btn').forEach(b => {
-          b.classList.remove('active');
-          b.setAttribute('aria-pressed', 'false');
-        });
-        e.target.classList.add('active');
-        e.target.setAttribute('aria-pressed', 'true');
-
-        const filter = e.target.dataset.filter;
-        let sortedItems = [...filteredItems];
-
-        switch(filter) {
-          case 'price-low':
-            sortedItems.sort((a, b) => a.precio - b.precio);
-            break;
-          case 'price-high':
-            sortedItems.sort((a, b) => b.precio - a.precio);
-            break;
-          case 'recent':
-            sortedItems.reverse();
-            break;
-          default:
-            // 'all' - mantener orden original
-            break;
-        }
-
-        filteredItems = sortedItems;
-        renderItems();
-      });
-    });
-
-    // Enviar por WhatsApp
-    function sendWhatsApp(codigo, descripcion, precio) {
-      const mensaje = `¡Hola! Me interesa este repuesto:\n\n` +
-                     `📋 Código: ${codigo}\n` +
-                     `📝 Descripción: ${descripcion}\n` +
-                     `💰 Precio: ${formatPrice(precio)}\n\n` +
-                     `¿Está disponible?`;
-
-      const url = `https://wa.me/595981000000?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, '_blank');
-    }
-
-    // Compartir producto
-    function shareProduct(codigo, descripcion) {
-      if (navigator.share) {
-        navigator.share({
-          title: `Otto Repuestos - ${codigo}`,
-          text: descripcion,
-          url: window.location.href
-        });
-      } else {
-        // Fallback: copiar al portapapeles
-        const text = `${codigo} - ${descripcion}\n${window.location.href}`;
-        navigator.clipboard.writeText(text).then(() => {
-          alert('Información copiada al portapapeles');
-        });
-      }
-    }
-
-    // Agregar al carrito
-    function addToCart(item) {
-      const exists = cart.find(ca
+    const debounce = (func, wait) => { let t; return (...a)
