@@ -11,17 +11,104 @@
     color: #e6e8ee;
     font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
   }
+  
+  /* Header con buscador */
+  .header {
+    padding: 20px;
+    background: #141a2a;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  
   h1 {
-    padding: 16px;
     text-align: center;
     font-size: 2em;
-    margin-bottom: 20px;
+    margin: 0 0 20px 0;
   }
+  
+  .search-container {
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 12px 50px 12px 20px;
+    border: 2px solid #2a3441;
+    border-radius: 25px;
+    background: #0b0f19;
+    color: #e6e8ee;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #25d366;
+  }
+  
+  .search-clear {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #a7b0c3;
+    cursor: pointer;
+    font-size: 18px;
+    display: none;
+  }
+  
+  .search-clear:hover {
+    color: #e6e8ee;
+  }
+  
+  /* Filtros y estadísticas */
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .filter-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .filter-btn {
+    padding: 8px 16px;
+    border: 1px solid #2a3441;
+    border-radius: 20px;
+    background: #141a2a;
+    color: #e6e8ee;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 12px;
+  }
+  
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: #25d366;
+    border-color: #25d366;
+    color: #000;
+  }
+  
+  .stats {
+    font-size: 12px;
+    color: #a7b0c3;
+  }
+  
   .grid {
     column-count: 2;
     column-gap: 15px;
     padding: 15px;
   }
+  
   .card {
     background: #141a2a;
     border-radius: 10px;
@@ -31,8 +118,20 @@
     display: inline-block;
     width: 100%;
     break-inside: avoid;
-    cursor: pointer; /* Agrega un cursor de mano para indicar que es clicable */
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
   }
+  
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .4);
+  }
+  
+  .card.hidden {
+    display: none;
+  }
+  
   .card img {
     width: 100%;
     height: auto;
@@ -40,25 +139,120 @@
     display: block;
     background: #0f1529;
   }
+  
   .info {
     padding: 10px;
     font-size: 13px;
   }
+  
   .info .codigo {
     font-weight: 700;
     font-size: 14px;
   }
+  
   .info .desc {
     color: #a7b0c3;
     font-size: 11px;
     margin-top: 5px;
     margin-bottom: 10px;
   }
+  
   .info .precio {
     font-weight: 700;
     color: #25d366;
     font-size: 15px;
   }
+  
+  /* Botones de acción en cada card */
+  .card-actions {
+    padding: 0 10px 10px;
+    display: flex;
+    gap: 8px;
+  }
+  
+  .btn {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  
+  .btn-whatsapp {
+    background: #25d366;
+    color: #000;
+  }
+  
+  .btn-whatsapp:hover {
+    background: #1ea952;
+  }
+  
+  .btn-share {
+    background: #2a3441;
+    color: #e6e8ee;
+  }
+  
+  .btn-share:hover {
+    background: #3a4551;
+  }
+  
+  /* Carrito flotante */
+  .cart-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25d366;
+    color: #000;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    z-index: 999;
+    font-size: 24px;
+    transition: all 0.3s;
+  }
+  
+  .cart-float:hover {
+    transform: scale(1.1);
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+  
+  /* Loading */
+  .loading {
+    text-align: center;
+    padding: 50px;
+    font-size: 16px;
+    color: #a7b0c3;
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: 50px;
+    color: #a7b0c3;
+  }
+  
   @media (min-width: 600px) {
     .grid {
       column-count: 3;
@@ -69,8 +263,19 @@
       column-count: 4;
     }
   }
+  
+  @media (max-width: 600px) {
+    .controls {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .filter-buttons {
+      justify-content: center;
+    }
+  }
 
-  /* --- Estilos para el Lightbox (popup) --- */
+  /* Estilos para el Lightbox mejorado */
   .lightbox {
     position: fixed;
     top: 0;
@@ -86,24 +291,93 @@
     opacity: 0;
     transition: opacity 0.3s, visibility 0.3s;
   }
+  
   .lightbox.active {
     visibility: visible;
     opacity: 1;
   }
-  .lightbox img {
+  
+  .lightbox-content {
+    position: relative;
     max-width: 90%;
     max-height: 90%;
+  }
+  
+  .lightbox img {
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
     background: transparent;
+  }
+  
+  .lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  
+  .lightbox-info {
+    position: absolute;
+    bottom: -80px;
+    left: 0;
+    right: 0;
+    background: rgba(20, 26, 42, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
   }
 </style>
 </head>
 <body>
-  <h1>Catálogo Otto Repuestos</h1>
-  <div class="grid" id="grid"></div>
+  <div class="header">
+    <h1>Catálogo Otto Repuestos</h1>
+    <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="Buscar por código o descripción...">
+      <button id="searchClear" class="search-clear">✕</button>
+    </div>
+  </div>
+  
+  <div class="controls">
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="price-low">Precio Bajo</button>
+      <button class="filter-btn" data-filter="price-high">Precio Alto</button>
+      <button class="filter-btn" data-filter="recent">Recientes</button>
+    </div>
+    <div class="stats">
+      <span id="itemCount">0</span> productos encontrados
+    </div>
+  </div>
 
+  <div id="loading" class="loading">Cargando productos...</div>
+  <div class="grid" id="grid"></div>
+  <div id="noResults" class="no-results" style="display: none;">
+    No se encontraron productos que coincidan con tu búsqueda
+  </div>
+
+  <!-- Carrito flotante -->
+  <div class="cart-float" id="cartFloat">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+  </div>
+
+  <!-- Lightbox mejorado -->
   <div id="lightbox" class="lightbox">
-    <img src="" alt="Imagen ampliada">
+    <div class="lightbox-content">
+      <button class="lightbox-close">&times;</button>
+      <img src="" alt="Imagen ampliada">
+      <div class="lightbox-info">
+        <div class="codigo"></div>
+        <div class="desc"></div>
+        <div class="precio"></div>
+      </div>
+    </div>
   </div>
 
 <script>
@@ -111,47 +385,327 @@ const money = n => new Intl.NumberFormat('es-PY').format(n) + " Gs";
 const gridElement = document.getElementById("grid");
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = lightbox.querySelector("img");
+const lightboxInfo = lightbox.querySelector(".lightbox-info");
+const searchInput = document.getElementById("searchInput");
+const searchClear = document.getElementById("searchClear");
+const itemCount = document.getElementById("itemCount");
+const loading = document.getElementById("loading");
+const noResults = document.getElementById("noResults");
+const cartFloat = document.getElementById("cartFloat");
+const cartCount = document.getElementById("cartCount");
 
-// La clave: Usamos 'fetch' para cargar el archivo data.json
-fetch('data.json')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('No se pudo cargar el archivo data.json');
-    }
-    return response.json();
-  })
-  .then(ITEMS => {
-    gridElement.innerHTML = ITEMS.map(p => `
-      <div class="card" data-fullimage="${p.imagen}">
-        <img src="${p.imagen}" alt="${p.descripcion}">
-        <div class="info">
-          <div class="codigo">${p.codigo}</div>
-          <div class="desc">${p.descripcion}</div>
-          <div class="precio">${money(p.precio)}</div>
-        </div>
-      </div>
-    `).join('');
+let ITEMS = [];
+let filteredItems = [];
+let cart = JSON.parse(localStorage.getItem('ottocart') || '[]');
 
-    // --- Lógica para el clic ---
-    const cards = document.querySelectorAll(".card");
-    cards.forEach(card => {
-      card.addEventListener("click", () => {
-        const fullImageUrl = card.getAttribute("data-fullimage");
-        lightboxImage.src = fullImageUrl;
-        lightbox.classList.add("active");
-      });
+// Actualizar contador del carrito
+function updateCartCount() {
+  cartCount.textContent = cart.length;
+  cartCount.style.display = cart.length > 0 ? 'flex' : 'none';
+}
+
+// Datos de ejemplo (reemplaza con tu data.json)
+const sampleData = [
+  {
+    codigo: "FR001",
+    descripcion: "Freno de disco delantero Toyota Corolla 2015-2020",
+    precio: 450000,
+    imagen: "https://via.placeholder.com/300x200/333/fff?text=Freno+Disco"
+  },
+  {
+    codigo: "MT002", 
+    descripcion: "Motor de arranque Nissan Sentra 1.8L",
+    precio: 320000,
+    imagen: "https://via.placeholder.com/300x200/333/fff?text=Motor+Arranque"
+  },
+  {
+    codigo: "AC003",
+    descripcion: "Aceite motor sintético 5W-30 4L",
+    precio: 180000,
+    imagen: "https://via.placeholder.com/300x200/333/fff?text=Aceite+Motor"
+  },
+  {
+    codigo: "FL004",
+    descripcion: "Filtro de aire Honda Civic 2016-2021",
+    precio: 85000,
+    imagen: "https://via.placeholder.com/300x200/333/fff?text=Filtro+Aire"
+  },
+  {
+    codigo: "BA005",
+    descripcion: "Batería 12V 60Ah libre mantenimiento",
+    precio: 280000,
+    imagen: "https://via.placeholder.com/300x200/333/fff?text=Bateria+12V"
+  },
+  {
+    codigo: "LL006",
+    descripcion: "Llantas 195/65R15 Michelin Energy Saver",
+    precio: 350000,
+    imagen: "https://via.placeholder.com/300x200/333/fff?text=Llantas+195"
+  }
+];
+
+// Cargar datos
+function loadData() {
+  // Intenta cargar desde data.json, si no existe usa datos de ejemplo
+  fetch('data.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Usando datos de ejemplo');
+      }
+      return response.json();
+    })
+    .then(data => {
+      ITEMS = data;
+      initializeCatalog();
+    })
+    .catch(error => {
+      console.log('Cargando datos de ejemplo...');
+      ITEMS = sampleData;
+      initializeCatalog();
     });
+}
 
-  })
-  .catch(error => {
-    console.error('Error al cargar el catálogo:', error);
-    gridElement.innerHTML = '<p style="text-align:center;">Hubo un error al cargar los productos. Por favor, inténtelo de nuevo más tarde.</p>';
+// Inicializar catálogo
+function initializeCatalog() {
+  loading.style.display = 'none';
+  filteredItems = [...ITEMS];
+  renderItems();
+  updateCartCount();
+}
+
+// Renderizar productos
+function renderItems() {
+  if (filteredItems.length === 0) {
+    gridElement.style.display = 'none';
+    noResults.style.display = 'block';
+    itemCount.textContent = '0';
+    return;
+  }
+  
+  gridElement.style.display = 'block';
+  noResults.style.display = 'none';
+  itemCount.textContent = filteredItems.length;
+  
+  gridElement.innerHTML = filteredItems.map(p => `
+    <div class="card" data-fullimage="${p.imagen}" data-codigo="${p.codigo}" data-desc="${p.descripcion}" data-precio="${p.precio}">
+      <img src="${p.imagen}" alt="${p.descripcion}" onerror="this.src='https://via.placeholder.com/300x200/333/fff?text=Sin+Imagen'">
+      <div class="info">
+        <div class="codigo">${p.codigo}</div>
+        <div class="desc">${p.descripcion}</div>
+        <div class="precio">${money(p.precio)}</div>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-whatsapp" onclick="sendWhatsApp('${p.codigo}', '${p.descripcion}', ${p.precio})">
+          💬 WhatsApp
+        </button>
+        <button class="btn btn-share" onclick="shareProduct('${p.codigo}', '${p.descripcion}')">
+          📤 Compartir
+        </button>
+      </div>
+    </div>
+  `).join('');
+
+  // Agregar event listeners para el lightbox
+  const cards = document.querySelectorAll(".card");
+  cards.forEach(card => {
+    const img = card.querySelector('img');
+    img.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openLightbox(card);
+    });
+    
+    // Agregar al carrito al hacer doble clic
+    card.addEventListener("dblclick", () => {
+      addToCart(card.dataset);
+    });
   });
+}
 
-// --- Lógica para cerrar el Lightbox al hacer clic fuera de la imagen ---
+// Abrir lightbox con información
+function openLightbox(card) {
+  const fullImageUrl = card.getAttribute("data-fullimage");
+  const codigo = card.getAttribute("data-codigo");
+  const desc = card.getAttribute("data-desc");
+  const precio = card.getAttribute("data-precio");
+  
+  lightboxImage.src = fullImageUrl;
+  lightboxInfo.querySelector('.codigo').textContent = codigo;
+  lightboxInfo.querySelector('.desc').textContent = desc;
+  lightboxInfo.querySelector('.precio').textContent = money(parseInt(precio));
+  
+  lightbox.classList.add("active");
+}
+
+// Cerrar lightbox
+function closeLightbox() {
+  lightbox.classList.remove("active");
+}
+
+// Búsqueda en tiempo real
+searchInput.addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase().trim();
+  
+  if (query) {
+    searchClear.style.display = 'block';
+    filteredItems = ITEMS.filter(item => 
+      item.codigo.toLowerCase().includes(query) || 
+      item.descripcion.toLowerCase().includes(query)
+    );
+  } else {
+    searchClear.style.display = 'none';
+    filteredItems = [...ITEMS];
+  }
+  
+  renderItems();
+});
+
+// Limpiar búsqueda
+searchClear.addEventListener('click', () => {
+  searchInput.value = '';
+  searchClear.style.display = 'none';
+  filteredItems = [...ITEMS];
+  renderItems();
+});
+
+// Filtros
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    
+    const filter = e.target.dataset.filter;
+    let sortedItems = [...filteredItems];
+    
+    switch(filter) {
+      case 'price-low':
+        sortedItems.sort((a, b) => a.precio - b.precio);
+        break;
+      case 'price-high':
+        sortedItems.sort((a, b) => b.precio - a.precio);
+        break;
+      case 'recent':
+        sortedItems.reverse();
+        break;
+      default:
+        // 'all' - mantener orden original
+        break;
+    }
+    
+    filteredItems = sortedItems;
+    renderItems();
+  });
+});
+
+// Enviar por WhatsApp
+function sendWhatsApp(codigo, descripcion, precio) {
+  const mensaje = `¡Hola! Me interesa este repuesto:\n\n` +
+                 `📋 Código: ${codigo}\n` +
+                 `📝 Descripción: ${descripcion}\n` +
+                 `💰 Precio: ${money(precio)}\n\n` +
+                 `¿Está disponible?`;
+  
+  const url = `https://wa.me/595981000000?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, '_blank');
+}
+
+// Compartir producto
+function shareProduct(codigo, descripcion) {
+  if (navigator.share) {
+    navigator.share({
+      title: `Otto Repuestos - ${codigo}`,
+      text: descripcion,
+      url: window.location.href
+    });
+  } else {
+    // Fallback: copiar al portapapeles
+    const text = `${codigo} - ${descripcion}\n${window.location.href}`;
+    navigator.clipboard.writeText(text).then(() => {
+      alert('Información copiada al portapapeles');
+    });
+  }
+}
+
+// Agregar al carrito
+function addToCart(item) {
+  const exists = cart.find(cartItem => cartItem.codigo === item.codigo);
+  
+  if (!exists) {
+    cart.push({
+      codigo: item.codigo,
+      descripcion: item.desc,
+      precio: parseInt(item.precio),
+      imagen: item.fullimage
+    });
+    
+    localStorage.setItem('ottocart', JSON.stringify(cart));
+    updateCartCount();
+    
+    // Feedback visual
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #25d366;
+      color: #000;
+      padding: 15px;
+      border-radius: 8px;
+      z-index: 9999;
+      font-weight: bold;
+    `;
+    notification.textContent = '¡Agregado al carrito!';
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 2000);
+  }
+}
+
+// Ver carrito
+cartFloat.addEventListener('click', () => {
+  if (cart.length === 0) {
+    alert('El carrito está vacío');
+    return;
+  }
+  
+  let cartMessage = '🛒 *TU CARRITO:*\n\n';
+  let total = 0;
+  
+  cart.forEach((item, index) => {
+    cartMessage += `${index + 1}. ${item.codigo}\n`;
+    cartMessage += `   ${item.descripcion}\n`;
+    cartMessage += `   ${money(item.precio)}\n\n`;
+    total += item.precio;
+  });
+  
+  cartMessage += `💰 *TOTAL: ${money(total)}*\n\n`;
+  cartMessage += '¿Te interesa hacer el pedido?';
+  
+  const url = `https://wa.me/595981000000?text=${encodeURIComponent(cartMessage)}`;
+  window.open(url, '_blank');
+});
+
+// Event listeners del lightbox
 lightbox.addEventListener("click", e => {
-  if (e.target !== lightboxImage) {
-    lightbox.classList.remove("active");
+  if (e.target === lightbox) {
+    closeLightbox();
+  }
+});
+
+lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+
+// Cargar datos al iniciar
+loadData();
+
+// Atajos de teclado
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeLightbox();
+  }
+  if (e.key === '/' && e.target.tagName !== 'INPUT') {
+    e.preventDefault();
+    searchInput.focus();
   }
 });
 
