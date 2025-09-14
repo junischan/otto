@@ -153,4 +153,228 @@
 
     // ========= HELPERS =========
     const formatPrice = (n) => new Intl.NumberFormat('es-PY').format(n) + " Gs";
-    const debounce = (func, wait) => { let t; return (...a)
+    const debounce = (func, wait) => { let t; return (...a) => { clearTimeout(t); t=setTimeout(()=>func(...a),wait); }; };
+
+    function resolveImage(path) {
+      const safe = encodeURI(path || '');
+      const base = new URL(IMG_BASE, document.baseURI);
+      return new URL(safe, base).href;
+    }
+
+    function updateCartCount() {
+      elements.cartCount.textContent = cart.length;
+      elements.cartCount.style.display = cart.length > 0 ? 'flex' : 'none';
+    }
+
+    // ========= DATA LOADER con fallback =========
+    async function loadData() {
+      elements.loading.style.display = 'block';
+
+      // 1) Intentar fetch
+      try {
+        const resp = await fetch(DATA_JSON_URL, { cache: 'no-store' });
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        ITEMS = await resp.json();
+        localStorage.setItem('ottoData', JSON.stringify(ITEMS));
+      } catch (e) {
+        // 2) Intentar LocalStorage
+        const cached = localStorage.getItem('ottoData');
+        if (cached) {
+          ITEMS = JSON.parse(cached);
+          console.warn('Usando datos de LocalStorage por error en fetch:', e.message);
+        } else {
+          // 3) Fallback embebido
+          console.warn('Cargando datos de respaldo embebidos:', e.message);
+          ITEMS = [
+            { "codigo": "XYZ-BARCO-a1", "descripcion": "Tira Barco Hilux 2012+", "precio": 310000, "imagen": "imagen/tira-barco-hilux-2004.jpeg" },
+            { "codigo": "XYZ-BARCO-02", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/s10-2008.jpeg" },
+            { "codigo": "XYZ-BARCO-04", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/20250908_150257.jpg" },
+            { "codigo": "XYZ-BARCO-05", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/punteraranger2013licrocs.jpg" },
+            { "codigo": "XYZ-BARCO-06", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/20250911_135258.jpg" },
+            { "codigo": "XYZ-BARCO-07", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
+            { "codigo": "XYZ-BARCO-08", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
+            { "codigo": "XYZ-BARCO-09", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
+            { "codigo": "XYZ-BARCO-10", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tira-barco.jpeg" },
+            { "codigo": "XYZ-BARCO-11", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/tomacorrienteranger025.jpg" },
+            { "codigo": "XYZ-BARCO-12", "descripcion": "Tira Barco S10 2012+", "precio": 310000, "imagen": "imagen/soporteantenaranger025.jpg" }
+          ];
+        }
+      }
+
+      initializeCatalog();
+      verifyAssets();
+    }
+
+    function initializeCatalog() {
+      elements.loading.style.display = 'none';
+      filteredItems = [...ITEMS];
+      renderItems();
+      updateCartCount();
+    }
+
+    // ========= RENDER =========
+    function renderItems() {
+      if (!filteredItems.length) {
+        elements.grid.style.display = 'none';
+        elements.noResults.style.display = 'block';
+        elements.itemCount.textContent = '0';
+        return;
+      }
+
+      elements.grid.style.display = 'block';
+      elements.noResults.style.display = 'none';
+      elements.itemCount.textContent = filteredItems.length;
+
+      elements.grid.innerHTML = filteredItems.map(p => `
+        <article class="card" data-fullimage="${resolveImage(p.imagen)}" data-codigo="${p.codigo}" data-desc="${p.descripcion}" data-precio="${p.precio}">
+          <img src="${resolveImage(p.imagen)}" alt="${p.descripcion}" loading="lazy"
+            onerror="this.src='https://via.placeholder.com/300x200/333/fff?text=Sin+Imagen'">
+          <div class="info">
+            <div class="codigo">${p.codigo}</div>
+            <div class="desc">${p.descripcion}</div>
+            <div class="precio">${formatPrice(p.precio)}</div>
+          </div>
+          <div class="card-actions">
+            <button class="btn btn-whatsapp" onclick="sendWhatsApp('${p.codigo}', '${p.descripcion}', ${p.precio})" aria-label="Contactar por WhatsApp para ${p.codigo}">
+              💬 WhatsApp
+            </button>
+            <button class="btn btn-share" onclick="shareProduct('${p.codigo}', '${p.descripcion}')" aria-label="Compartir ${p.codigo}">
+              📤 Compartir
+            </button>
+          </div>
+        </article>
+      `).join('');
+
+      // Eventos de tarjetas
+      document.querySelectorAll(".card").forEach(card => {
+        const img = card.querySelector('img');
+        img.addEventListener("click", (e) => { e.stopPropagation(); openLightbox(card); });
+        card.addEventListener("dblclick", () => { addToCart(card.dataset); });
+      });
+    }
+
+    // ========= LIGHTBOX =========
+    function openLightbox(card) {
+      const fullImageUrl = card.getAttribute("data-fullimage");
+      const codigo = card.getAttribute("data-codigo");
+      const desc = card.getAttribute("data-desc");
+      const precio = card.getAttribute("data-precio");
+
+      elements.lightboxImage.src = fullImageUrl;
+      elements.lightboxImage.alt = `Imagen ampliada de ${desc}`;
+      elements.lightboxInfo.querySelector('.codigo').textContent = codigo;
+      elements.lightboxInfo.querySelector('.desc').textContent = desc;
+      elements.lightboxInfo.querySelector('.precio').textContent = formatPrice(parseInt(precio));
+
+      elements.lightbox.classList.add("active");
+      elements.lightbox.focus();
+    }
+    function closeLightbox(){ elements.lightbox.classList.remove("active"); }
+    elements.lightbox.addEventListener('click', (e) => {
+      if (e.target === elements.lightbox || e.target.classList.contains('lightbox-close')) closeLightbox();
+    });
+
+    // ========= BUSCADOR Y FILTROS =========
+    elements.searchInput.addEventListener('input', debounce((e) => {
+      const q = e.target.value.toLowerCase().trim();
+      if (q) {
+        elements.searchClear.style.display = 'block';
+        filteredItems = ITEMS.filter(item =>
+          (item.codigo || '').toLowerCase().includes(q) ||
+          (item.descripcion || '').toLowerCase().includes(q)
+        );
+      } else {
+        elements.searchClear.style.display = 'none';
+        filteredItems = [...ITEMS];
+      }
+      renderItems();
+    }, 300));
+
+    elements.searchClear.addEventListener('click', () => {
+      elements.searchInput.value = '';
+      elements.searchClear.style.display = 'none';
+      filteredItems = [...ITEMS];
+      renderItems();
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+        e.target.classList.add('active'); e.target.setAttribute('aria-pressed','true');
+        const filter = e.target.dataset.filter;
+        let sorted = [...filteredItems];
+        switch(filter){
+          case 'price-low': sorted.sort((a,b)=>a.precio-b.precio); break;
+          case 'price-high': sorted.sort((a,b)=>b.precio-a.precio); break;
+          case 'recent': sorted.reverse(); break;
+          default: break;
+        }
+        filteredItems = sorted; renderItems();
+      });
+    });
+
+    // ========= WHATSAPP / SHARE =========
+    function sendWhatsApp(codigo, descripcion, precio) {
+      const mensaje = `¡Hola! Me interesa este repuesto:\n\n📋 Código: ${codigo}\n📝 Descripción: ${descripcion}\n💰 Precio: ${formatPrice(precio)}\n\n¿Está disponible?`;
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
+    }
+    function shareProduct(codigo, descripcion) {
+      if (navigator.share) {
+        navigator.share({ title:`Otto Repuestos - ${codigo}`, text:descripcion, url:window.location.href });
+      } else {
+        const text = `${codigo} - ${descripcion}\n${window.location.href}`;
+        navigator.clipboard.writeText(text).then(()=> alert('Información copiada al portapapeles'));
+      }
+    }
+    window.sendWhatsApp = sendWhatsApp;
+    window.shareProduct = shareProduct;
+
+    // ========= CARRITO =========
+    function addToCart(data) {
+      const item = {
+        codigo: data.codigo,
+        descripcion: data.desc,
+        precio: parseInt(data.precio,10),
+        imagen: data.fullimage
+      };
+      const exists = cart.find(c => c.codigo === item.codigo);
+      if (exists) {
+        exists.cantidad = (exists.cantidad || 1) + 1;
+      } else {
+        item.cantidad = 1;
+        cart.push(item);
+      }
+      persistCart(); updateCartCount();
+    }
+    function persistCart(){ localStorage.setItem('ottocart', JSON.stringify(cart)); renderCart(); }
+    function renderCart() {
+      if (!elements.cartItems) return;
+      if (!cart.length) {
+        elements.cartItems.innerHTML = '<p>Tu carrito está vacío.</p>';
+        elements.cartTotal.textContent = '0 Gs';
+        return;
+      }
+      elements.cartItems.innerHTML = cart.map((it, i) => `
+        <div class="cart-item">
+          <img src="${resolveImage(it.imagen)}" alt="${it.descripcion}"
+               onerror="this.src='https://via.placeholder.com/80x60/333/fff?text=Sin+Imagen'">
+          <div style="flex:1">
+            <div><strong>${it.codigo}</strong> — ${it.descripcion}</div>
+            <div> Cantidad:
+              <button aria-label="Disminuir" onclick="decQty(${i})">−</button>
+              <span>${it.cantidad}</span>
+              <button aria-label="Aumentar" onclick="incQty(${i})">+</button>
+            </div>
+            <div>Subtotal: ${formatPrice(it.precio * it.cantidad)}</div>
+          </div>
+          <button aria-label="Quitar" onclick="removeItem(${i})">🗑️</button>
+        </div>
+      `).join('');
+      const total = cart.reduce((s,it)=> s + it.precio*it.cantidad, 0);
+      elements.cartTotal.textContent = formatPrice(total);
+    }
+    function incQty(i){ cart[i].cantidad++; persistCart(); updateCartCount(); }
+    function decQty(i){ cart[i].cantidad = Math.max(1, cart[i].cantidad-1); persistCart(); updateCartCount(); }
+    function removeItem(i){ cart.splice(i,1); persistCart(); updateCartCount(); }
+    window.incQty = incQty; window.decQty = decQty; window.removeItem = removeIte
