@@ -94,7 +94,7 @@
     "codigo": "52017221",
     "descripcion": "Guardabarro trasero izquierdo",
     "precio": 0,
-    "imagen": "imagenes/52017221.jpg",
+    "imagen": "imagenes/221.jpg",
     "categoria": "Guardabarro"
   },
   {
@@ -108,7 +108,7 @@
     "codigo": "94716493",
     "descripcion": "Guardabarro delantero derecho (variante)",
     "precio": 0,
-    "imagen": "imagenes/94716493.jpg",
+    "imagen": "imagenes/493.jpg",
     "categoria": "Guardabarro"
   },
 ]
