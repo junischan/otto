@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Validador JSON de Repuestos</title>
+  <style>
+    :root { --fg:#222; --muted:#666; --ok:#0a7c2f; --warn:#b00020; --card:#fff; --bg:#f6f7f9; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, Arial, sans-serif; background: var(--bg); color: var(--fg); }
+    header { padding: 18px 16px; background:#fff; box-shadow: 0 2px 8px rgba(0,0,0,.06); position: sticky; top:0; z-index: 1; }
+    h1 { margin:0 0 8px; font-size: 20px; }
+    .row { display:flex; gap:10px; flex-wrap: wrap; }
+    input[type="search"] { flex:1; padding:10px 12px; border:1px solid #ddd; border-radius:10px; font-size:14px; }
+    .badge { padding:6px 10px; border-radius:999px; background:#eef3ff; color:#2a4bd7; font-weight:600; font-size:12px; }
+    main { padding:16px; display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:16px; }
+    .card { background: var(--card); border-radius:14px; box-shadow: 0 2px 10px rgba(0,0,0,.07); padding:14px; }
+    .thumb { width:100%; aspect-ratio: 4/3; object-fit:cover; border-radius:10px; background:#eee; }
+    .meta { margin:10px 0 0; font-size:14px; }
+    .meta b { color:#0b62c0; }
+    .muted { color:var(--muted); font-size:13px; }
+    .ok { color: var(--ok); font-weight:700; }
+    .warn { color: var(--warn); font-weight:700; }
+    .footer { text-align:center; padding:18px; color:var(--muted); font-size:12px; }
+    .hidden { display:none !important; }
+    .chip { display:inline-block; margin-top:6px; padding:4px 8px; background:#f0f0f0; border-radius:999px; font-size:12px; }
+    .toolbar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+    button { padding:9px 12px; border-radius:10px; border:1px solid #ddd; background:#fff; cursor:pointer; }
+    button:hover { background:#f3f3f3; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Validador JSON de Repuestos</h1>
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="Buscar por código, descripción o categoría…" />
+      <span id="count" class="badge">0 items</span>
+      <button id="btnReload" title="Recargar data.json">Recargar</button>
+      <span id="status" class="muted"></span>
+    </div>
+  </header>
+
+  <main id="grid"></main>
+
+  <div class="footer">
+    Lee <b>data.json</b> en esta carpeta y carga imágenes desde <b>/imagen/</b>.
+  </div>
+
+  <script>
+    const GRID = document.getElementById("grid");
+    const Q = document.getElementById("q");
+    const COUNT = document.getElementById("count");
+    const STATUS = document.getElementById("status");
+    const BTN = document.getElementById("btnReload");
+
+    let DATA = [];
+    let FILTERED = [];
+
+    function fmtGs(n) {
+      if (n === null || n === undefined) return "—";
+      if (typeof n !== "number") return String(n);
+      return new Intl.NumberFormat("es-PY").format(n) + " Gs";
+    }
+
+    function imageEl(src, alt) {
+      const img = document.createElement("img");
+      img.className = "thumb";
+      img.alt = alt || "";
+      img.loading = "lazy";
+      img.src = src;
+
+      // Marcar error si no carga
+      img.addEventListener("error", () => {
+        img.classList.add("error");
+        const warn = document.createElement("div");
+        warn.className = "warn";
+        warn.textContent = "⚠ No se encontró la imagen: " + src;
+        img.replaceWith(warn);
+      });
+      return img;
+    }
+
+    function card(item) {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.dataset.codigo = (item.codigo || "").toLowerCase();
+      div.dataset.descripcion = (item.descripcion || "").toLowerCase();
+      div.dataset.categoria = (item.categoria || "").toLowerCase();
+
+      const img = imageEl(item.imagen, item.descripcion);
+
+      const title = document.createElement("div");
+      title.innerHTML = `<b>${item.codigo}</b> — ${item.descripcion}`;
+
+      const meta = document.createElement("div");
+      meta.className = "meta";
+      const precioTxt = (item.precio === 0)
+        ? `<span class="muted">precio:</span> <span class="warn">0 (verificar)</span>`
+        : `<span class="muted">precio:</span> <span class="${item.precio ? 'ok' : 'muted'}">${fmtGs(item.precio)}</span>`;
+      meta.innerHTML = `${precioTxt} &nbsp; • &nbsp; <span class="chip">${item.categoria || '—'}</span>`;
+
+      div.appendChild(img);
+      div.appendChild(title);
+      div.appendChild(meta);
+      return div;
+    }
+
+    function render(list) {
+      GRID.innerHTML = "";
+      list.forEach(x => GRID.appendChild(card(x)));
+      COUNT.textContent = `${list.length} item${list.length===1?"":"s"}`;
+    }
+
+    function applyFilter() {
+      const q = Q.value.trim().toLowerCase();
+      if (!q) {
+        FILTERED = DATA.slice();
+      } else {
+        FILTERED = DATA.filter(it =>
+          (it.codigo||"").toLowerCase().includes(q) ||
+          (it.descripcion||"").toLowerCase().includes(q) ||
+          (it.categoria||"").toLowerCase().includes(q)
+        );
+      }
+      render(FILTERED);
+    }
+
+    async function loadJSON() {
+      STATUS.textContent = "Cargando data.json…";
+      try {
+        const res = await fetch("data.json", { cache: "no-cache" });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        if (!Array.isArray(json)) throw new Error("El JSON debe ser un array [] de objetos.");
+        DATA = json;
+        STATUS.textContent = "OK";
+        applyFilter();
+      } catch (e) {
+        STATUS.textContent = "Error: " + e.message;
+        GRID.innerHTML = `<div class="card"><div class="warn">No se pudo leer <b>data.json</b> (${e.message}).</div>
+          <div class="muted">Verifica que el archivo exista y que el JSON sea válido.</div></div>`;
+      }
+    }
+
+    Q.addEventListener("input", applyFilter);
+    BTN.addEventListener("click", loadJSON);
+
+    // Carga inicial
+    loadJSON();
+  </script>
+</body>
+</html>
