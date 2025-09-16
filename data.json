@@ -3,112 +3,112 @@
     "codigo": "EL-001",
     "descripcion": "Elástico suspensión Ranger",
     "precio": 250000,
-    "imagen": "imagenes/elastic-mecanica.jpg",
+    "imagen": "imagen/elastic-mecanica.jpg",
     "categoria": "Mecánica"
   },
   {
     "codigo": "FI-002",
     "descripcion": "Filtro aceite Hilux",
     "precio": 45000,
-    "imagen": "imagenes/filtro-mecanica.jpg",
+    "imagen": "imagen/filtro-mecanica.jpg",
     "categoria": "Mecánica"
   },
   {
     "codigo": "HO-003",
     "descripcion": "Homocinética Amarok",
     "precio": 380000,
-    "imagen": "imagenes/homosinerica-mecanica.jpg",
+    "imagen": "imagen/homosinerica-mecanica.jpg",
     "categoria": "Mecánica"
   },
   {
     "codigo": "KI-004",
     "descripcion": "Kit molduras S10",
     "precio": 120000,
-    "imagen": "imagenes/kitmoldura.jpg",
+    "imagen": "imagen/kitmoldura.jpg",
     "categoria": "Accesorios"
   },
   {
     "codigo": "PA-005",
     "descripcion": "Paragolpe Ranger 2013",
     "precio": 950000,
-    "imagen": "imagenes/punteraranger2013licrocs-paragolpe.jpg",
+    "imagen": "imagen/punteraranger2013licrocs-paragolpe.jpg",
     "categoria": "Paragolpes"
   },
   {
     "codigo": "AC-006",
     "descripcion": "Tira Barco S10 2008",
     "precio": 310000,
-    "imagen": "imagenes/s10-2008-accesorio.jpeg",
+    "imagen": "imagen/s10-2008-accesorio.jpeg",
     "categoria": "Accesorios"
   },
   {
     "codigo": "EL-007",
     "descripcion": "Soporte antena Ranger",
     "precio": 75000,
-    "imagen": "imagenes/soporteantenaranger025-electricayelectronica.jpg",
+    "imagen": "imagen/soporteantenaranger025-electricayelectronica.jpg",
     "categoria": "Eléctrica y Electrónica"
   },
   {
     "codigo": "AC-008",
     "descripcion": "Tira Barco Hilux 2004+",
     "precio": 310000,
-    "imagen": "imagenes/tira-barco-hilux-2004-accesorio.jpeg",
+    "imagen": "imagen/tira-barco-hilux-2004-accesorio.jpeg",
     "categoria": "Accesorios"
   },
   {
     "codigo": "AC-009",
     "descripcion": "Tira Barco universal",
     "precio": 310000,
-    "imagen": "imagenes/tira-barco.jpeg",
+    "imagen": "imagen/tira-barco.jpeg",
     "categoria": "Accesorios"
   },
   {
     "codigo": "EL-010",
     "descripcion": "Tomacorriente Ranger",
     "precio": 65000,
-    "imagen": "imagenes/tomacorrienteranger025-electricayelectronica.jpg",
+    "imagen": "imagen/tomacorrienteranger025-electricayelectronica.jpg",
     "categoria": "Eléctrica y Electrónica"
   },
   {
     "codigo": "94772391",
     "descripcion": "Guardabarro delantero derecho",
     "precio": 0,
-    "imagen": "imagenes/94772391.jpg",
+    "imagen": "imagen/IMG_20250915_133922.jpg",
     "categoria": "Guardabarro"
   },
   {
     "codigo": "94772390",
     "descripcion": "Guardabarro delantero izquierdo",
     "precio": 0,
-    "imagen": "imagenes/94772390.jpg",
+    "imagen": "imagen/94772390.jpg",
     "categoria": "Guardabarro"
   },
   {
     "codigo": "52017222",
     "descripcion": "Guardabarro trasero derecho",
     "precio": 0,
-    "imagen": "imagenes/52017222.jpg",
+    "imagen": "imagen/52017222.jpg",
     "categoria": "Guardabarro"
   },
   {
     "codigo": "52017221",
     "descripcion": "Guardabarro trasero izquierdo",
     "precio": 0,
-    "imagen": "imagenes/221.jpg",
+    "imagen": "imagen/221.jpg",
     "categoria": "Guardabarro"
   },
   {
     "codigo": "94716494",
     "descripcion": "Guardabarro delantero izquierdo (variante)",
     "precio": 0,
-    "imagen": "imagenes/94716494.jpg",
+    "imagen": "imagen/94716494.jpg",
     "categoria": "Guardabarro"
   },
   {
     "codigo": "94716493",
     "descripcion": "Guardabarro delantero derecho (variante)",
     "precio": 0,
-    "imagen": "imagenes/493.jpg",
+    "imagen": "imagen/493.jpg",
     "categoria": "Guardabarro"
   }
 ]
