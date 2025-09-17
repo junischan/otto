@@ -196,21 +196,33 @@
       wireLightbox();
     }
 
-    /* ====== CABECERA DE CATEGORÍAS (FIJAS) ====== */
-    function renderCategoryFilters() {
-      const cats = ['Todos', ...CATEGORIES];
-      elements.categoryFilters.innerHTML = cats.map((c,idx) =>
-        `<button class="filter-btn ${idx===0?'active':''}" data-cat="${c}" aria-pressed="${idx===0?'true':'false'}">${c}</button>`
-      ).join('');
-      elements.categoryFilters.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          elements.categoryFilters.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
-          btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
-          currentCategory = btn.dataset.cat;
-          applyFilters();
-        });
+   /* ====== CABECERA DE CATEGORÍAS (DINÁMICAS) ====== */
+function renderCategoryFilters() {
+  // Paso 1: Extraer todas las categorías únicas de los productos cargados
+  const uniqueCategories = [...new Set(ITEMS.map(p => getCategory(p)))].sort();
+
+  // Paso 2: Crear la lista de botones, empezando siempre con "Todos"
+  const cats = ['Todos', ...uniqueCategories];
+
+  // Paso 3: Generar el HTML para los botones
+  elements.categoryFilters.innerHTML = cats.map((c,idx) =>
+    `<button class="filter-btn ${idx===0?'active':''}" data-cat="${c}" aria-pressed="${idx===0?'true':'false'}">${c}</button>`
+  ).join('');
+
+  // Paso 4: Volver a asignar los event listeners a los nuevos botones
+  elements.categoryFilters.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      elements.categoryFilters.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed','false');
       });
-    }
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed','true');
+      currentCategory = btn.dataset.cat;
+      applyFilters();
+    });
+  });
+}
 
     /* ====== BARRA DE ORDEN ====== */
     function buildSortBar(){
