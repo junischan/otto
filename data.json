@@ -110,5 +110,419 @@
     "precio": 0,
     "imagen": "imagen/493.jpg",
     "categoria": "Guardabarro"
+  },
+  {
+    "codigo": "26212167",
+    "descripcion": "Moldura cromada parrilla GM Onix/Prisma 21/22 sup.",
+    "precio": 1175000,
+    "categoria": "Accesorios",
+    "imagen": "26212167.jpg"
+  },
+  {
+    "codigo": "25798301",
+    "descripcion": "Calcomanía carrocería GM S10 12/20 4x4",
+    "precio": 115000,
+    "categoria": "Accesorios",
+    "imagen": "25798301.jpg"
+  },
+  {
+    "codigo": "52046258",
+    "descripcion": "Caja depurador aire GM S10 12/17",
+    "precio": 3180000,
+    "categoria": "Mecánica",
+    "imagen": "52046258.jpg"
+  },
+  {
+    "codigo": "52085280",
+    "descripcion": "Protector inferior motor GM S10 17/17 frontal/plástico",
+    "precio": 395000,
+    "categoria": "Protecciones",
+    "imagen": "52085280.jpg"
+  },
+  {
+    "codigo": "94739820",
+    "descripcion": "Capa retrovisor LD GM S10 12/17 cromado",
+    "precio": 595000,
+    "categoria": "Espejos",
+    "imagen": "94739820.jpg"
+  },
+  {
+    "codigo": "94889016",
+    "descripcion": "Spoiler paragolpe delantero GM S10 20/21",
+    "precio": 875000,
+    "categoria": "Spoiler",
+    "imagen": "94889016.jpg"
+  },
+  {
+    "codigo": "2H7807417AK2ZZ",
+    "descripcion": "Paragolpe tras VW Amarok 12/20 cromado c/sensor",
+    "precio": 5995000,
+    "categoria": "Paragolpes",
+    "imagen": "2h7807417ak2zz.jpg"
+  },
+  {
+    "codigo": "2H7807502C9B9",
+    "descripcion": "Posapie central parag. tras VW Amarok 12/15",
+    "precio": 695000,
+    "categoria": "Accesorios",
+    "imagen": "2h7807502c9b9.jpg"
+  },
+  {
+    "codigo": "2H7853677A9",
+    "descripcion": "Parrilla inferior paragolpes VW Amarok 25/25 Central",
+    "precio": 2980000,
+    "categoria": "Parrillas",
+    "imagen": "2h7853677a9.jpg"
+  },
+  {
+    "codigo": "2H8059018BFW",
+    "descripcion": "Moldura central paragolpes VW Amarok 24/25",
+    "precio": 2750000,
+    "categoria": "Accesorios",
+    "imagen": "2h8059018bfw.jpg"
+  },
+  {
+    "codigo": "100288180",
+    "descripcion": "Capa panel instrumento Fiat Strada 20/22",
+    "precio": 4380000,
+    "categoria": "Tablero",
+    "imagen": "100288180.jpg"
+  },
+  {
+    "codigo": "26212167",
+    "descripcion": "Moldura cromada parrilla GM Onix/Prisma 21/22 sup.",
+    "precio": 1175000,
+    "categoria": "Accesorios",
+    "imagen": "26212167.jpg"
+  },
+  {
+    "codigo": "25798301",
+    "descripcion": "Calcomanía carrocería GM S10 12/20 4x4",
+    "precio": 115000,
+    "categoria": "Accesorios",
+    "imagen": "25798301.jpg"
+  },
+  {
+    "codigo": "52046258",
+    "descripcion": "Caja depurador aire GM S10 12/17",
+    "precio": 3180000,
+    "categoria": "Mecánica",
+    "imagen": "52046258.jpg"
+  },
+  {
+    "codigo": "52085280",
+    "descripcion": "Protector inferior motor GM S10 17/17 frontal/plástico",
+    "precio": 395000,
+    "categoria": "Protecciones",
+    "imagen": "52085280.jpg"
+  },
+  {
+    "codigo": "94739820",
+    "descripcion": "Capa retrovisor LD GM S10 12/17 cromado",
+    "precio": 595000,
+    "categoria": "Espejos",
+    "imagen": "94739820.jpg"
+  },
+  {
+    "codigo": "94889016",
+    "descripcion": "Spoiler paragolpe delantero GM S10 20/21",
+    "precio": 875000,
+    "categoria": "Spoiler",
+    "imagen": "94889016.jpg"
+  },
+  {
+    "codigo": "2H7807417AK2ZZ",
+    "descripcion": "Paragolpe tras VW Amarok 12/20 cromado c/sensor",
+    "precio": 5995000,
+    "categoria": "Paragolpes",
+    "imagen": "2h7807417ak2zz.jpg"
+  },
+  {
+    "codigo": "2H7807502C9B9",
+    "descripcion": "Posapie central parag. tras VW Amarok 12/15",
+    "precio": 695000,
+    "categoria": "Accesorios",
+    "imagen": "2h7807502c9b9.jpg"
+  },
+  {
+    "codigo": "2H7853677A9",
+    "descripcion": "Parrilla inferior paragolpes VW Amarok 25/25 Central",
+    "precio": 2980000,
+    "categoria": "Parrillas",
+    "imagen": "2h7853677a9.jpg"
+  },
+  {
+    "codigo": "2H8059018BFW",
+    "descripcion": "Moldura central paragolpes VW Amarok 24/25",
+    "precio": 2750000,
+    "categoria": "Accesorios",
+    "imagen": "2h8059018bfw.jpg"
+  },
+  {
+    "codigo": "100288180",
+    "descripcion": "Capa panel instrumento Fiat Strada 20/22",
+    "precio": 4380000,
+    "categoria": "Tablero",
+    "imagen": "100288180.jpg"
+  },
+  {
+    "codigo": "100277246",
+    "descripcion": "Cinturón seguridad del LE Fiat Strada 20/22",
+    "precio": 1870000,
+    "categoria": "Seguridad",
+    "imagen": "100277246.jpg"
+  },
+  {
+    "codigo": "AB39 8K618 AA",
+    "descripcion": "Deflector radiador Ford Ranger 12/20 cuadrado 3.2",
+    "precio": 795000,
+    "categoria": "Refrigeración",
+    "imagen": "ab39_8k618_aa.jpg"
+  },
+  {
+    "codigo": "EB3Z 6K775 Q",
+    "descripcion": "Radiador intercooler Ford Ranger 12/17",
+    "precio": 3980000,
+    "categoria": "Refrigeración",
+    "imagen": "eb3z_6k775_q.jpg"
+  },
+  {
+    "codigo": "9C11 12A697 AC",
+    "descripcion": "Sensor intercooler Ford Ranger 12/17",
+    "precio": 580000,
+    "categoria": "Sensores",
+    "imagen": "9c11_12a697_ac.jpg"
+  },
+  {
+    "codigo": "JB3Z 17A870 B",
+    "descripcion": "Guía parrilla del LE Ford Ranger 20/20",
+    "precio": 220000,
+    "categoria": "Parrillas",
+    "imagen": "jb3z_17a870_b.jpg"
+  },
+  {
+    "codigo": "EB3Z 8310 Q",
+    "descripcion": "Deflector radiador LD Ford Ranger 17/17 frontal",
+    "precio": 585000,
+    "categoria": "Refrigeración",
+    "imagen": "eb3z_8310_q.jpg"
+  },
+  {
+    "codigo": "EB3Z 16138 D",
+    "descripcion": "Panel frontal Ford Transit 12/15",
+ "precio": 4750000,
+    "categoria": "Carrocería",
+    "imagen": "eb3z_16138_d.jpg"
+  },
+  {
+    "codigo": "6C1Z 8578 H",
+    "descripcion": "Polea tensora correa Ford Ranger 17/18 3.2",
+    "precio": 2680000,
+    "categoria": "Mecánica",
+    "imagen": "6c1z_8578_h.jpg"
+  },
+  {
+    "codigo": "JB3Z 15A862 CD",
+    "descripcion": "Soporte sensor estacionamiento LE Ford Ranger 17/20",
+    "precio": 220000,
+    "categoria": "Accesorios",
+    "imagen": "jb3z_15a862_cd.jpg"
+  },
+  {
+    "codigo": "JB3Z 15A862 BE",
+    "descripcion": "Soporte sensor estacionamiento LD Ford Ranger 17/20",
+    "precio": 220000,
+    "categoria": "Accesorios",
+    "imagen": "jb3z_15a862_be.jpg"
+  },
+  {
+    "codigo": "EB3Z 3A103 BPA",
+    "descripcion": "Homocinética del LD Ford Ranger 12/22 completa",
+    "precio": 3995000,
+    "categoria": "Transmisión",
+    "imagen": "eb3z_3a103_bpa.jpg"
+  },
+  {
+    "codigo": "H1BZ 18936 S",
+    "descripcion": "Base antena Ford Ranger 24/25",
+    "precio": 1380000,
+    "categoria": "Accesorios",
+    "imagen": "h1bz_18936_s.jpg"
+  },
+  {
+    "codigo": "HJ3Z 7A098 A",
+    "descripcion": "Filtro aceite caja Ford F150 01/12",
+    "precio": 850000,
+    "categoria": "Filtros",
+    "imagen": "hj3z_7a098_a.jpg"
+  },
+  {
+    "codigo": "NIWZ 6025713 APA",
+    "descripcion": "Vidrio puerta tras LE Ford Ranger 23/25",
+    "precio": 650000,
+    "categoria": "Vidrios",
+    "imagen": "niwz_6025713_apa.jpg"
+  },
+  {
+    "codigo": "NIWZ 655100 ARA",
+    "descripcion": "Porta equipaje Ford Ranger 23/25 Super Alloy",
+    "precio": 380000,
+    "categoria": "Accesorios",
+    "imagen": "niwz_655100_ara.jpg"
+  },
+  {
+    "codigo": "EB3G 18K579 DF",
+    "descripcion": "Manguera calefacción Ford Ranger 12/23",
+    "precio": 850000,
+    "categoria": "Refrigeración",
+    "imagen": "eb3g_18k579_df.jpg"
+  },
+  {
+    "codigo": "NIWZ 19A464 DQ",
+    "descripcion": "Tomada elect. carga Ford Ranger Raptor 24/25",
+    "precio": 3490000,
+    "categoria": "Eléctrica",
+    "imagen": "niwz_19a464_dq.jpg"
+  },
+  {
+    "codigo": "NIWZ 82040 DBA",
+    "descripcion": "Parrilla capot Ford Ranger 24/25",
+    "precio": 7250000,
+    "categoria": "Parrillas",
+    "imagen": "niwz_82040_dba.jpg"
+  },
+  {
+    "codigo": "AV1Z 9D658 A",
+    "descripcion": "Interruptor control radio Ford Ecosport 12/15",
+    "precio": 495000,
+    "categoria": "Eléctrica",
+    "imagen": "av1z_9d658_a.jpg"
+  },
+  {
+    "codigo": "EV6Z 1A189 H",
+    "descripcion": "Sensor presión neumático Ford Ranger 16/19",
+    "precio": 580000,
+    "categoria": "Sensores",
+    "imagen": "ev6z_1a189_h.jpg"
+  },
+  {
+    "codigo": "M1PZ 15K601 C",
+    "descripcion": "Sistema telemando Ford Bronco Sport 12/15",
+    "precio": 850000,
+    "categoria": "Eléctrica",
+    "imagen": "m1pz_15k601_c.jpg"
+  },
+  {
+    "codigo": "JS12 4701 AA78",
+    "descripcion": "Puerta tras LE Ford Territory 21/23",
+    "precio": 8550000,
+    "categoria": "Carrocería",
+    "imagen": "js12_4701_aa78.jpg"
+  },
+  {
+    "codigo": "NIWZ 84180 B",
+    "descripcion": "Moldura cromada parr. del Ford Ranger 24/25 CROM/SU",
+    "precio": 1695000,
+    "categoria": "Parrillas",
+    "imagen": "niwz_84180_b.jpg"
+  },
+  {
+    "codigo": "N1WZ 17B807 Y",
+    "descripcion": "Paragolpe sup. tras Ford Ranger 24/24 s/sensor",
+    "precio": 2495000,
+    "categoria": "Paragolpes",
+    "imagen": "n1wz_17b807_y.jpg"
+  },
+  {
+    "codigo": "N1WZ 2620124 B",
+    "descripcion": "Puerta del LD Ford Ranger 24/25",
+    "precio": 5470000,
+    "categoria": "Carrocería",
+    "imagen": "n1wz_2620124_b.jpg"
+  },
+  {
+    "codigo": "EB3Z 17682 DRA",
+    "descripcion": "Retrovisor puerta LD Ford Ranger 12/20 CRO B/A 7P",
+    "precio": 2980000,
+    "categoria": "Espejos",
+    "imagen": "eb3z_17682_dra.jpg"
+  },
+  {
+    "codigo": "EB3Z 17682 AB",
+    "descripcion": "Retrovisor puerta LI Ford Ranger 12/20 CRO B/A 9P",
+    "precio": 2980000,
+    "categoria": "Espejos",
+    "imagen": "eb3z_17682_ab.jpg"
+  },
+  {
+    "codigo": "FB3Z 7Y902 B",
+    "descripcion": "Conversor caja trans Ford Ranger 17/17",
+    "precio": 9980000,
+    "categoria": "Transmisión",
+    "imagen": "fb3z_7y902_b.jpg"
+  },
+  {
+    "codigo": "GK2Q 9F478 AA",
+    "descripcion": "Junta válvula EGR Ford Ranger 24/25",
+    "precio": 195000,
+    "categoria": "Mecánica",
+    "imagen": "gk2q_9f478_aa.jpg"
+  },
+  {
+    "codigo": "AB39 17K825 C",
+    "descripcion": "Puntera paragolpe tras LE Ford Ranger 13/15 cromo c/sensor",
+    "precio": 2180000,
+    "categoria": "Paragolpes",
+    "imagen": "ab39_17k825_c.jpg"
+  },
+  {
+    "codigo": "JN1Z17625AA",
+    "descripcion": "Deflector inferior paragolpes Ford EcoSport 17/17",
+    "precio": 695000,
+    "categoria": "Paragolpes",
+    "imagen": "jn1z17625aa.jpg"
+  },
+  {
+    "codigo": "52046258-REP",
+    "descripcion": "Caja depurador aire GM S10 12/17 (otro comprobante)",
+    "precio": 3180000,
+    "categoria": "Mecánica",
+    "imagen": "52046258-rep.jpg"
+  },
+  {
+    "codigo": "52085280-REP",
+    "descripcion": "Protector inf. motor GM S10 17/17 frontal/plástico (otro)",
+    "precio": 395000,
+    "categoria": "Protecciones",
+    "imagen": "52085280-rep.jpg"
+  },
+  {
+    "codigo": "JG1797",
+    "descripcion": "Cola de pato tras. Ford F250 01/11 (juego)",
+    "precio": 280000,
+    "categoria": "Accesorios",
+    "imagen": "jg1797.jpg"
+  },
+  {
+    "codigo": "F250-ESTRIBO-R",
+    "descripcion": "Estribo lado derecho Ford F250 01/11",
+    "precio": 2180000,
+    "categoria": "Accesorios",
+    "imagen": "f250-estribo-r.jpg"
+  },
+  {
+    "codigo": "N1WZ265A382C",
+    "descripcion": "Moldura antinieblo Ford Ranger 22/24",
+    "precio": 2480000,
+    "categoria": "Accesorios",
+    "imagen": "n1wz265a382c.jpg"
+  },
+  {
+    "codigo": "JB3Z3079C",
+    "descripcion": "Parrilla sup. inf. Ford Ranger 20/20",
+    "precio": 3680000,
+    "categoria": "Parrillas",
+    "imagen": "jb3z3079c.jpg"
   }
+  
 ]
