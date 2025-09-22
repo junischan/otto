@@ -3,113 +3,113 @@
     "codigo": "EL-001",
     "descripcion": "Elástico suspensión Ranger",
     "precio": 250000,
-    "imagen": "imagen/elastic-mecanica.jpg",
-    "categoria": "Mecánica"
+    "categoria": "Mecánica",
+    "imagen": "imagen/elastic-mecanica.jpg"
   },
   {
     "codigo": "FI-002",
     "descripcion": "Filtro aceite Hilux",
     "precio": 45000,
-    "imagen": "imagen/filtro-mecanica.jpg",
-    "categoria": "Mecánica"
+    "categoria": "Mecánica",
+    "imagen": "imagen/filtro-mecanica.jpg"
   },
   {
     "codigo": "HO-003",
     "descripcion": "Homocinética Amarok",
     "precio": 380000,
-    "imagen": "imagen/homosinerica-mecanica.jpg",
-    "categoria": "Mecánica"
+    "categoria": "Mecánica",
+    "imagen": "imagen/homosinerica-mecanica.jpg"
   },
   {
     "codigo": "KI-004",
     "descripcion": "Kit molduras S10",
     "precio": 120000,
-    "imagen": "imagen/kitmoldura.jpg",
-    "categoria": "Accesorios"
+    "categoria": "Accesorios",
+    "imagen": "imagen/kitmoldura.jpg"
   },
   {
     "codigo": "PA-005",
     "descripcion": "Paragolpe Ranger 2013",
     "precio": 950000,
-    "imagen": "imagen/punteraranger2013licrocs-paragolpe.jpg",
-    "categoria": "Paragolpes"
+    "categoria": "Paragolpes",
+    "imagen": "imagen/punteraranger2013licrocs-paragolpe.jpg"
   },
   {
     "codigo": "AC-006",
     "descripcion": "Tira Barco S10 2008",
     "precio": 310000,
-    "imagen": "imagen/s10-2008-accesorio.jpeg",
-    "categoria": "Accesorios"
+    "categoria": "Accesorios",
+    "imagen": "imagen/s10-2008-accesorio.jpeg"
   },
   {
     "codigo": "EL-007",
     "descripcion": "Soporte antena Ranger",
     "precio": 75000,
-    "imagen": "imagen/soporteantenaranger025-electricayelectronica.jpg",
-    "categoria": "Eléctrica y Electrónica"
+    "categoria": "Circuitos eléctricos",
+    "imagen": "imagen/soporteantenaranger025-electricayelectronica.jpg"
   },
   {
     "codigo": "AC-008",
     "descripcion": "Tira Barco Hilux 2004+",
     "precio": 310000,
-    "imagen": "imagen/tira-barco-hilux-2004-accesorio.jpeg",
-    "categoria": "Accesorios"
+    "categoria": "Accesorios",
+    "imagen": "imagen/tira-barco-hilux-2004-accesorio.jpeg"
   },
   {
     "codigo": "AC-009",
     "descripcion": "Tira Barco universal",
     "precio": 310000,
-    "imagen": "imagen/tira-barco.jpeg",
-    "categoria": "Accesorios"
+    "categoria": "Accesorios",
+    "imagen": "imagen/tira-barco.jpeg"
   },
   {
     "codigo": "EL-010",
     "descripcion": "Tomacorriente Ranger",
     "precio": 65000,
-    "imagen": "imagen/tomacorrienteranger025-electricayelectronica.jpg",
-    "categoria": "Eléctrica y Electrónica"
+    "categoria": "Circuitos eléctricos",
+    "imagen": "imagen/tomacorrienteranger025-electricayelectronica.jpg"
   },
   {
     "codigo": "94772391",
     "descripcion": "Guardabarro delantero derecho",
     "precio": 0,
-    "imagen": "imagen/IMG_20250915_133922.jpg",
-    "categoria": "Guardabarro"
+    "categoria": "Guardabarro",
+    "imagen": "imagen/img_20250915_133922.jpg"
   },
   {
     "codigo": "94772390",
     "descripcion": "Guardabarro delantero izquierdo",
     "precio": 0,
-    "imagen": "imagen/94772390.jpg",
-    "categoria": "Guardabarro"
+    "categoria": "Guardabarro",
+    "imagen": "imagen/94772390.jpg"
   },
   {
     "codigo": "52017222",
     "descripcion": "Guardabarro trasero derecho",
     "precio": 0,
-    "imagen": "imagen/52017222.jpg",
-    "categoria": "Guardabarro"
+    "categoria": "Guardabarro",
+    "imagen": "imagen/52017222.jpg"
   },
   {
     "codigo": "52017221",
     "descripcion": "Guardabarro trasero izquierdo",
     "precio": 0,
-    "imagen": "imagen/221.jpg",
-    "categoria": "Guardabarro"
+    "categoria": "Guardabarro",
+    "imagen": "imagen/221.jpg"
   },
   {
     "codigo": "94716494",
     "descripcion": "Guardabarro delantero izquierdo (variante)",
     "precio": 0,
-    "imagen": "imagen/94716494.jpg",
-    "categoria": "Guardabarro"
+    "categoria": "Guardabarro",
+    "imagen": "imagen/94716494.jpg"
   },
   {
     "codigo": "94716493",
     "descripcion": "Guardabarro delantero derecho (variante)",
     "precio": 0,
-    "imagen": "imagen/493.jpg",
-    "categoria": "Guardabarro"
+    "categoria": "Guardabarro",
+    "imagen": "imagen/493.jpg"
   },
   {
     "codigo": "26212167",
@@ -150,84 +150,7 @@
     "codigo": "94889016",
     "descripcion": "Spoiler paragolpe delantero GM S10 20/21",
     "precio": 875000,
-    "categoria": "Spoiler",
-    "imagen": "94889016.jpg"
-  },
-  {
-    "codigo": "2H7807417AK2ZZ",
-    "descripcion": "Paragolpe tras VW Amarok 12/20 cromado c/sensor",
-    "precio": 5995000,
     "categoria": "Paragolpes",
-    "imagen": "2h7807417ak2zz.jpg"
-  },
-  {
-    "codigo": "2H7807502C9B9",
-    "descripcion": "Posapie central parag. tras VW Amarok 12/15",
-    "precio": 695000,
-    "categoria": "Accesorios",
-    "imagen": "2h7807502c9b9.jpg"
-  },
-  {
-    "codigo": "2H7853677A9",
-    "descripcion": "Parrilla inferior paragolpes VW Amarok 25/25 Central",
-    "precio": 2980000,
-    "categoria": "Parrillas",
-    "imagen": "2h7853677a9.jpg"
-  },
-  {
-    "codigo": "2H8059018BFW",
-    "descripcion": "Moldura central paragolpes VW Amarok 24/25",
-    "precio": 2750000,
-    "categoria": "Accesorios",
-    "imagen": "2h8059018bfw.jpg"
-  },
-  {
-    "codigo": "100288180",
-    "descripcion": "Capa panel instrumento Fiat Strada 20/22",
-    "precio": 4380000,
-    "categoria": "Tablero",
-    "imagen": "100288180.jpg"
-  },
-  {
-    "codigo": "26212167",
-    "descripcion": "Moldura cromada parrilla GM Onix/Prisma 21/22 sup.",
-    "precio": 1175000,
-    "categoria": "Accesorios",
-    "imagen": "26212167.jpg"
-  },
-  {
-    "codigo": "25798301",
-    "descripcion": "Calcomanía carrocería GM S10 12/20 4x4",
-    "precio": 115000,
-    "categoria": "Accesorios",
-    "imagen": "25798301.jpg"
-  },
-  {
-    "codigo": "52046258",
-    "descripcion": "Caja depurador aire GM S10 12/17",
-    "precio": 3180000,
-    "categoria": "Mecánica",
-    "imagen": "52046258.jpg"
-  },
-  {
-    "codigo": "52085280",
-    "descripcion": "Protector inferior motor GM S10 17/17 frontal/plástico",
-    "precio": 395000,
-    "categoria": "Protecciones",
-    "imagen": "52085280.jpg"
-  },
-  {
-    "codigo": "94739820",
-    "descripcion": "Capa retrovisor LD GM S10 12/17 cromado",
-    "precio": 595000,
-    "categoria": "Espejos",
-    "imagen": "94739820.jpg"
-  },
-  {
-    "codigo": "94889016",
-    "descripcion": "Spoiler paragolpe delantero GM S10 20/21",
-    "precio": 875000,
-    "categoria": "Spoiler",
     "imagen": "94889016.jpg"
   },
   {
@@ -290,7 +213,7 @@
     "codigo": "9C11 12A697 AC",
     "descripcion": "Sensor intercooler Ford Ranger 12/17",
     "precio": 580000,
-    "categoria": "Sensores",
+    "categoria": "Circuitos eléctricos",
     "imagen": "9c11_12a697_ac.jpg"
   },
   {
@@ -310,7 +233,7 @@
   {
     "codigo": "EB3Z 16138 D",
     "descripcion": "Panel frontal Ford Transit 12/15",
- "precio": 4750000,
+    "precio": 4750000,
     "categoria": "Carrocería",
     "imagen": "eb3z_16138_d.jpg"
   },
@@ -360,7 +283,7 @@
     "codigo": "NIWZ 6025713 APA",
     "descripcion": "Vidrio puerta tras LE Ford Ranger 23/25",
     "precio": 650000,
-    "categoria": "Vidrios",
+    "categoria": "Carrocería",
     "imagen": "niwz_6025713_apa.jpg"
   },
   {
@@ -381,7 +304,7 @@
     "codigo": "NIWZ 19A464 DQ",
     "descripcion": "Tomada elect. carga Ford Ranger Raptor 24/25",
     "precio": 3490000,
-    "categoria": "Eléctrica",
+    "categoria": "Circuitos eléctricos",
     "imagen": "niwz_19a464_dq.jpg"
   },
   {
@@ -395,21 +318,21 @@
     "codigo": "AV1Z 9D658 A",
     "descripcion": "Interruptor control radio Ford Ecosport 12/15",
     "precio": 495000,
-    "categoria": "Eléctrica",
+    "categoria": "Circuitos eléctricos",
     "imagen": "av1z_9d658_a.jpg"
   },
   {
     "codigo": "EV6Z 1A189 H",
     "descripcion": "Sensor presión neumático Ford Ranger 16/19",
     "precio": 580000,
-    "categoria": "Sensores",
+    "categoria": "Circuitos eléctricos",
     "imagen": "ev6z_1a189_h.jpg"
   },
   {
     "codigo": "M1PZ 15K601 C",
     "descripcion": "Sistema telemando Ford Bronco Sport 12/15",
     "precio": 850000,
-    "categoria": "Eléctrica",
+    "categoria": "Circuitos eléctricos",
     "imagen": "m1pz_15k601_c.jpg"
   },
   {
@@ -549,7 +472,7 @@
     "codigo": "JB3Z15K867J",
     "descripcion": "Cableado sensor estacionamiento Ford Ranger 12/20",
     "precio": 780000,
-    "categoria": "Electricidad",
+    "categoria": "Circuitos eléctricos",
     "imagen": "jb3z15k867j.jpg"
   },
   {
@@ -565,180 +488,5 @@
     "precio": 550000,
     "categoria": "Filtros",
     "imagen": "bg1x9155aa.jpg"
-  },
-  {
-    "codigo": "CN1517526AC",
-    "descripcion": "Brazo limpia parabrisas LD Ford Ecosport 12/15",
-    "precio": 280000,
-    "categoria": "Accesorios",
-    "imagen": "cn1517526ac.jpg"
-  },
-  {
-    "codigo": "GN1517892BB",
-    "descripcion": "Refuerzo paragolpes trasero Ford Ecosport 12/15",
-    "precio": 490000,
-    "categoria": "Paragolpes",
-    "imagen": "gn1517892bb.jpg"
-  },
-  {
-    "codigo": "BF87A600A",
-    "descripcion": "Soporte caja Ford F250 01/11",
-    "precio": 880000,
-    "categoria": "Mecánica",
-    "imagen": "bf87a600a.jpg"
-  },
-  {
-    "codigo": "GN1Z15K868BF",
-    "descripcion": "Chicote faro Ford Ecosport 12/15",
-    "precio": 850000,
-    "categoria": "Electricidad",
-    "imagen": "gn1z15k868bf.jpg"
-  },
-  {
-    "codigo": "BC4S8101AA",
-    "descripcion": "Tapa reservatorio Ford F250 01/11",
-    "precio": 150000,
-    "categoria": "Accesorios",
-    "imagen": "bc4s8101aa.jpg"
-  },
-  {
-    "codigo": "GN1517A892DA",
-    "descripcion": "Soporte lateral paragolpes tras LE Ford Ecosport 12/15",
-    "precio": 180000,
-    "categoria": "Paragolpes",
-    "imagen": "gn1517a892da.jpg"
-  },
-  {
-    "codigo": "GN1517A899ACXWA",
-    "descripcion": "Tapa remolque paragolpes Ford Ecosport 17/17",
-    "precio": 95000,
-    "categoria": "Accesorios",
-    "imagen": "gn1517a899acxwa.jpg"
-  },
-  {
-    "codigo": "JB3Z17859A",
-    "descripcion": "Viga paragolpes Ford Ranger Raptor 17/20",
-    "precio": 5350000,
-    "categoria": "Paragolpes",
-    "imagen": "jb3z17859a.jpg"
-  },
-  {
-    "codigo": "JB3Z8B291C",
-    "descripcion": "Protector inferior radiador Ford Ranger 17/20",
-    "precio": 1580000,
-    "categoria": "Protecciones",
-    "imagen": "jb3z8b291c.jpg"
-  },
-  {
-    "codigo": "GN1Z6038J",
-    "descripcion": "Soporte motor LD Ford Ecosport 12/15",
-    "precio": 1280000,
-    "categoria": "Mecánica",
-    "imagen": "gn1z6038j.jpg"
-  },
-  {
-    "codigo": "AB3Z78178AB",
-    "descripcion": "Parrilla capot Ford Ranger 12/15 carcaza negro",
-    "precio": 2780000,
-    "categoria": "Parrillas",
-    "imagen": "ab3z78178ab.jpg"
-  },
-  {
-    "codigo": "AB3Y2103100JF",
-    "descripcion": "Parabrisas Ford Ranger 12/17 c/sensor",
-    "precio": 3990000,
-    "categoria": "Vidrios",
-    "imagen": "ab3y2103100jf.jpg"
-  },
-  {
-    "codigo": "EB3Z6K775B",
-    "descripcion": "Radiador intercooler Ford Ranger 12/18 3.2",
-    "precio": 2200000,
-    "categoria": "Refrigeración",
-    "imagen": "eb3z6k775b.jpg"
-  },
-  {
-    "codigo": "JB3Z14B321K",
-    "descripcion": "Módulo central airbag Ford Ranger 19/22",
-    "precio": 2550000,
-    "categoria": "Seguridad",
-    "imagen": "jb3z14b321k.jpg"
-  },
-  {
-    "codigo": "EB3B5311CC",
-    "descripcion": "Deflector radiador Ford Ranger 17/17 frontal",
-    "precio": 280000,
-    "categoria": "Protecciones",
-    "imagen": "eb3b5311cc.jpg"
-  },
-  {
-    "codigo": "EB3Z16005B",
-    "descripcion": "Guardabarro LD Ford Ranger 17/17",
-    "precio": 1480000,
-    "categoria": "Guardabarro",
-    "imagen": "eb3z16005b.jpg"
-  },
-  {
-    "codigo": "AB3Z6K683C",
-    "descripcion": "Manguera intercooler Ford Ranger 12/19 2.2",
-    "precio": 980000,
-    "categoria": "Refrigeración",
-    "imagen": "ab3z6k683c.jpg"
-  },
-  {
-    "codigo": "AB39A21813BB",
-    "descripcion": "Cerradura puerta LE Ford Ranger 12/15",
-    "precio": 1480000,
-    "categoria": "Carrocería",
-    "imagen": "ab39a21813bb.jpg"
-  },
-  {
-    "codigo": "JS111553AA",
-    "descripcion": "Moldura manija ext LD/LE Ford Ranger 12/15 cromo",
-    "precio": 290000,
-    "categoria": "Accesorios",
-    "imagen": "js111553aa.jpg"
-  },
-  {
-    "codigo": "HC3Z15K601G",
-    "descripcion": "Llave comando control remoto Ford Territory 20/21",
-    "precio": 980000,
-    "categoria": "Seguridad",
-    "imagen": "hc3z15k601g.jpg"
-  },
-  {
-    "codigo": "JB3Z74093B",
-    "descripcion": "Control llave Ford Focus 12/15",
-    "precio": 1250000,
-    "categoria": "Seguridad",
-    "imagen": "jb3z74093b.jpg"
-  },
-  {
-    "codigo": "EB3G6C624HA",
-    "descripcion": "Radiador aceite Ford Ranger 12/15 (enfría caja)",
-    "precio": 2280000,
-    "categoria": "Refrigeración",
-    "imagen": "eb3g6c624ha.jpg"
-  },
-  {
-    "codigo": "JB3Z17859A",
-    "descripcion": "Manguera salida reservatorio Ford Ranger 17/17",
-    "precio": 520000,
-    "categoria": "Refrigeración",
-    "imagen": "jb3z17859a.jpg"
-  },
-  {
-    "codigo": "GN1Z6038J",
-    "descripcion": "Viga paragolpes Ford Ranger Raptor 17/20",
-    "precio": 5350000,
-    "categoria": "Paragolpes",
-    "imagen": "gn1z6038j.jpg"
-  },
-  {
-    "codigo": "GN1Z6038J",
-    "descripcion": "Soporte motor LD Ford Ecosport 12/15",
-    "precio": 1280000,
-    "categoria": "Mecánica",
-    "imagen": "gn1z6038j.jpg"
   }
-]
+    ]
