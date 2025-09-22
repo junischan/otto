@@ -488,5 +488,12 @@
     "precio": 550000,
     "categoria": "Filtros",
     "imagen": "bg1x9155aa.jpg"
+  },
+  {
+  "codigo": "52037595",
+  "descripcion": "Soporte plástico de paragolpe delantero izquierdo (bracket). Material PP+EPDM. OEM GM.",
+  "precio": null,
+  "categoria": "Paragolpes",
+  "imagen": "chatgpt-1758549048389.jpg"
   }
-    ]
+ ]
