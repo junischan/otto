@@ -452,132 +452,132 @@
     "descripcion": "Brazo limpia parabrisas LE Ford Ecosport 14/15",
     "precio": 280000,
     "categoria": "Accesorios",
-    "imagen": "cn1517527ac.jpg"
+    "imagen": "imagen/cn1517527ac.jpg"
   },
   {
     "codigo": "CN18B012AA",
     "descripcion": "Caño reservatorio Ford Ecosport 14/15",
     "precio": 320000,
     "categoria": "Accesorios",
-    "imagen": "cn18b012aa.jpg"
+    "imagen": "imagen/cn18b012aa.jpg"
   },
   {
     "codigo": "EC45A622AA",
     "descripcion": "Válvula estacionamiento Ford Cargo 08/11",
     "precio": 1350000,
     "categoria": "Mecánica",
-    "imagen": "ec45a622aa.jpg"
+    "imagen": "imagen/ec45a622aa.jpg"
   },
   {
     "codigo": "JB3Z15K867J",
     "descripcion": "Cableado sensor estacionamiento Ford Ranger 12/20",
     "precio": 780000,
     "categoria": "Circuitos eléctricos",
-    "imagen": "jb3z15k867j.jpg"
+    "imagen": "imagen/jb3z15k867j.jpg"
   },
   {
     "codigo": "F3B51C403AA",
     "descripcion": "Brazo limpia parabrisas Ford Ecosport 12/15",
     "precio": 550000,
     "categoria": "Accesorios",
-    "imagen": "f3b51c403aa.jpg"
+    "imagen": "imagen/f3b51c403aa.jpg"
   },
   {
     "codigo": "BG1X9155AA",
     "descripcion": "Elemento filtro combustible Ford F350 01/11",
     "precio": 550000,
     "categoria": "Filtros",
-    "imagen": "bg1x9155aa.jpg"
+    "imagen": "imagen/bg1x9155aa.jpg"
   },
   {
   "codigo": "52037595",
   "descripcion": "Soporte plástico de paragolpe delantero izquierdo (bracket). Material PP+EPDM. OEM GM.",
   "precio": null,
   "categoria": "Paragolpes",
-  "imagen": "chatgpt-1758549048389.jpg"
+  "imagen": "imagen/chatgpt-1758549048389.jpg"
   },
   {
     "codigo": "BB3D6051C1B",
     "descripcion": "Junta cabecote Ford Ranger 12/15",
     "precio": 990000,
     "categoria": "Mecánica",
-    "imagen": "20250922_150321.jpg"
+    "imagen": "imagen/20250922_150321.jpg"
   },
   {
     "codigo": "N1WZ26290D12AC",
     "descripcion": "Calcomanía capó Ford Ranger 22/23 4x4 Rodovier",
     "precio": 450000,
     "categoria": "Accesorios",
-    "imagen": "20250922_150431.jpg"
+    "imagen": "imagen/20250922_150431.jpg"
   },
   {
     "codigo": "4C1Q8B555AB",
     "descripcion": "Manguera AJA Ford Ranger 12/15",
     "precio": 230000,
     "categoria": "Refrigeración",
-    "imagen": "20250922_150315.jpg"
+    "imagen": "imagen/20250922_150315.jpg"
   },
   {
     "codigo": "EB3Z17682BA",
     "descripcion": "Retrovisor puerta LD Ford Ranger 12/20 cromo B/A 9P/3",
     "precio": 3950000,
     "categoria": "Espejos",
-    "imagen": "20250922_150402.jpg"
+    "imagen": "imagen/20250922_150402.jpg"
   },
   {
     "codigo": "AB39B6274AC",
     "descripcion": "Manguera sup. radiador Ford Ranger 12/23 2.2 Duto",
     "precio": 3180000,
     "categoria": "Refrigeración",
-    "imagen": "20250922_155832.jpg"
+    "imagen": "imagen/20250922_155832.jpg"
   },
   {
     "codigo": "CK3B7F464BB",
     "descripcion": "Enfriador válvula EGR Ford Ranger 12/15 3.2 (4x4)",
     "precio": 3180000,
     "categoria": "Mecánica",
-    "imagen": "20250922_150402.jpg"
+    "imagen": "imagen/20250922_150402.jpg"
   },
   {
     "codigo": "AB392600193AA",
     "descripcion": "Coxín panel frontal Ford Ranger 12/15 inf.",
     "precio": 290000,
     "categoria": "Carrocería",
-    "imagen": "20250922_150420.jpg"
+    "imagen": "imagen/20250922_150420.jpg"
   },
   {
     "codigo": "EB3ZB005D",
     "descripcion": "Radiador agua Ford Ranger 17/20 Alt/Limited cromado",
     "precio": 3880000,
     "categoria": "Refrigeración",
-    "imagen": "20250922_150656.jpg"
+    "imagen": "imagen/20250922_150656.jpg"
   },
   {
     "codigo": "EB3B134030FM",
     "descripcion": "Faro del LE Ford Ranger 12/17 3.2",
     "precio": 4980000,
     "categoria": "Iluminación",
-    "imagen": "20250922_150630.jpg"
+    "imagen": "imagen/20250922_150630.jpg"
   },
   {
     "codigo": "6C1ZB678H",
     "descripcion": "Soporte electro-magnético Ford Ranger 12/23",
     "precio": 2380000,
     "categoria": "Circuitos eléctricos",
-    "imagen": "20250922_150334.jpg"
+    "imagen": "imagen/20250922_150334.jpg"
   },
   {
     "codigo": "EB3Z41044A74C",
     "descripcion": "Airbag acompañante Ford Ranger 17/17",
     "precio": 4480000,
     "categoria": "Seguridad",
-    "imagen": "20250922_150536.jpg"
+    "imagen": "imagen/20250922_150536.jpg"
   },
   {
     "codigo": "AB3Z21045J76BL",
     "descripcion": "Airbag volante Ford Ranger 19/21 inf./volante negro",
     "precio": 2890000,
     "categoria": "Seguridad",
-    "imagen": "20250922_150558.jpg"
+    "imagen": "imagen/20250922_150558.jpg"
   }
  ]
