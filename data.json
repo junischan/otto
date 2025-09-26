@@ -131,13 +131,13 @@
     "precio": 3180000,
     "categoria": "Mecánica",
     "imagen": "52046258.jpg"
-  },
+  },6
   {
     "codigo": "52085280",
     "descripcion": "Protector inferior motor GM S10 17/17 frontal/plástico",
     "precio": 395000,
     "categoria": "Protecciones",
-    "imagen": "52085280.jpg"
+    "imagen": "imagen/52085280.jpg"
   },
   {
     "codigo": "94739820",
@@ -151,7 +151,7 @@
     "descripcion": "Spoiler paragolpe delantero GM S10 20/21",
     "precio": 875000,
     "categoria": "Paragolpes",
-    "imagen": "94889016.jpg"
+    "imagen": "imagen/94889016.jpg"
   },
   {
     "codigo": "2H7807417AK2ZZ",
